@@ -55,9 +55,7 @@ Types of Roles:
 	- Allows access between a 3rd party AWS account and one that you own
 	- **Trusting** acocount has resources that need to be accessed (i.e. has the permissions)
 	- **Trusted** account contains user(s) that need to access resources in the _trusting_ account
-	- Setting up cross account access
-		1. Create a role for the Trusting account
-		2. Allow the `sts:AssumeRole` action in that role. Will need to specify in the resource the _trusting account's id_
+	- See additional document for how to setup cross account access
 4. Role for Identity Provider Access
 	- Can grant web access to identity providers (such as Amazon Cognito, Facebook, Google)
 	- Can grant web access for single sign on to SAML providers
