@@ -9,6 +9,7 @@ Service for relational databases
 - Amazon Aurora
 
 Can select different compute instances (based on vCPU, RAM)
+- _Can select between general purpose or compute-optimized_
 
 RDS instances can reside in either a single availability zone (AZ) or multiple AZs
 - When setting up instances in multiple AZs, you are still restricted to the same region as the primary instance
