@@ -3,7 +3,8 @@
 Services for NoSQL databases/key-value stores
 - Look up data via primary key or through indexes
 - High performance, single-digit ms latency
-- Storage automatically grows, so you don't have to scale i
+- Storage automatically grows, so you don't have to scale it
+- Reads/Writes slow down as table gets larger
 
 Pricing is based on
 - Amount of storage
