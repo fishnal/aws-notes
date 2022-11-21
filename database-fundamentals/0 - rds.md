@@ -25,7 +25,7 @@ Primary instance can go down if:
 - If primary instance was rebooted with failover
 - If primary instance class is modified
 
-# Scaling Storage
+## Scaling Storage
 Two types of storage: Elastic Block Storage (EBS) and Shared Cluster Storage
 
 **EBS**
@@ -53,7 +53,7 @@ Two types of storage: Elastic Block Storage (EBS) and Shared Cluster Storage
 - Cannot configure storage options
 - Storage automatically scales as your db grows
 
-# Scaling Compute Power
+## Scaling Compute Power
 
 Vertical Scaling - improving the hardware
 - Can do this at any time for RDS
@@ -63,7 +63,7 @@ Horizontal Scaling - adding more instances
 - Read replicas help to offload traffic from main instance
 - When creating a read replica, it will clone the data from your main instance. If you use multi AZ, then it will clone data from a secondary instance to reduce performance impacts.
 
-# Automated Services
+## Automated Services
 - Patches
 - Backups
 	- Automated backups will be deleted after a certain duration
