@@ -29,9 +29,76 @@ Pros
 - Highly available
 - Super fast
 Cons
+- There are no alternatives or on-premise solutions for DynamoDB. You must use AWS in order to use DynamoDB.
+	- If you need to keep data on-premises, then DynamoDB is not for you.
 - Eventual consistency
 - Queries are less flexible than with most relational databases. This ensures all queries are as fast as possible
 - Maximum record size is 400KB
 - Can have up to 20 GSIs and 5 LSIs
-- If you use provisioned throughput and you use up all your read capacity units, you will get an error if you make another read operation. (Same thing for write)
-	- Although, you can always just provisioned throughput at any time
+
+# Types of Keys
+
+- Primary/Hash key
+- Sort/Range Key
+
+If your table uses a sort key and you are requesting to get a _single_ item (not to be confused with _querying for multiple items_), then you must specify the **primary and sort key** in your request. Otherwise DDB will throw an error
+- Similarly, when _creating_ an item, you must provide both keys. (This is not required when updating an item though)
+
+Use case for Primary and Sort Keys
+- Highscores/Leaderboards: a username would be the primary key, and a video game title would be a sort key.
+- Ordering from online store: order ids would be primary key, line number would be sort key
+	- The "nth Line number" refers to the nth item purchased in the order
+
+# Throughput and Capacity Units (CU)
+
+If you use provisioned throughput and you use up all your read capacity units, you will get an error if you make another read operation. (Same thing for write)
+- You can always adjust provisioned throughput at any time.
+- If you adjust provisioned throughput, the table will still remain available.
+
+1 Read Capacity Unit allows you to retrieve:
+- 1 record per second
+- Up to 4KB in size
+	- This is rounded up, so a 5KB record would cost 2 RCUs
+- With strong consistency (more on this below)
+	- Eventually consistent reads cost half as much
+
+1 Write Capacity Unit allows you to store:
+- 1 record per second
+- Up to 1 KB in size (also rounded up, similar to RCUs)
+
+# Queries
+
+**Query** searches the table for a single partition key
+- Can return a single record if the table is not using sort keys
+- If using sort keys, multiple records may be returned from the query
+
+Queries can be strongly or eventually consistent
+- Strongly consistent will check all three replicas of the table in different AZs, and sends back the most recent version of the data
+- Eventually consistent will fetch data from one replica, so as a result it may not be the most recent version of the data.
+
+In the case of tables with sort keys
+- Results can further be filtered out
+	- Numerical comparisons:
+		- `sort key > 50`
+	- String comparisons:
+		- `sort key between "Jackson" and "James"`
+		- `sort key begins with "Ross"`
+- Results can be ordered by sort key
+
+Results can be filtered even further on _any_ attribute; however, this can cost more RCUs
+- DDB will always search for records by the partition key first, apply sort key filters, and then apply filters on other attributes.
+
+# Scans
+
+**Scans** search across ALL partition keys and can return multiple records (this contrasts with **queries**)
+
+Scans **don't** require a partition key in the request
+- As a result, your scans can cost more RCUs than queries.
+
+Scans can be filtered on any attribute
+
+Scans **cannot** be ordered
+
+Scans are always **eventually consistent**
+
+Scans can run in parallel
