@@ -1,5 +1,8 @@
 # DynamoDB (DDB)
 
+- TODO Given a GSI that has primary and range key, is the range key required when inserting/updating a record into the table
+- TODO Given an LSI, is the range key required when inserting/updating a record into the table?
+
 Services for NoSQL databases/key-value stores
 - Look up data via primary key or through indexes
 - High performance, single-digit ms latency
@@ -15,14 +18,7 @@ Can encrypt data at rest via
 - KMS - Customer managed CMK (a key stored in your account that you manage)
 - KMS - AWS managed CMK (a key stored in your account, but managed by AWS, charges apply)
 
-# Secondary Indexes
-- If you want to query and match on 2 different columns, you need an index
-- When you want to use an index, you need to explicitly mention that in your request to DDB.
-
-**Global Secondary Index (GSI)** - query across entire table
-**Local Secondary Index (LSI)** - can only find data within a single partition key
-
-# Pros vs Cons
+## Pros vs Cons
 Pros
 - Fully-managed
 - Schemaless
@@ -48,6 +44,43 @@ Use case for Primary and Sort Keys
 - Highscores/Leaderboards: a username would be the primary key, and a video game title would be a sort key.
 - Ordering from online store: order ids would be primary key, line number would be sort key
 	- The "nth Line number" refers to the nth item purchased in the order
+
+# Secondary Indexing
+- If you want to query and match on 2 different columns, you need an index
+- When you want to use an index, you need to explicitly mention that in your request to DDB.
+
+**Global Secondary Index (GSI)** - query across entire table
+- Contains a selection of attributes from the base table, but has a primary key that is different from the base table's primary key.
+	- Conceptually, think of it as a "new table" with it's own primary and (optional) sort key. In fact, a GSI uses storage that is separate from the main table
+- _Attribute projection_
+	- When an attribute is projected, then the attribute will also be visible in the queries.
+	- If an attribute is not projected on a GSI, you will not see it in the results when you query the GSI.
+	- Only the GSI's keys must be projected. Projecting other attributes are optional.
+- Data is asynchronously synced from the main table to the GSI
+- GSIs are always eventually consistent (unlike the main table, which _can_ be strongly consistent)
+- Any attribute that is a key for a GSI **must** be defined when inserting/updating a record
+- Any attribute that is a key for a GSI **will** be type checked. Example below
+	- A record has `foo` (a string) and `bar` (a number) as attributes.
+	- The table's primary key is `foo`
+	- Without a GSI, `bar` can technically take on any type it wants (number, string, array, etc).
+	- However suppose there's a GSI whose primary key is a number called `bar`. Now, whenever you insert/update a record, the `bar` attribute must be present AND it must be a number.
+- Creation/Configuration
+	- Can be created at any time
+	- Each GSI has it's own throughput (separate from main table) and **must be configured**
+	- Up to 20 GSIs per table
+**Local Secondary Index (LSI)** - can only find data within a single partition key
+- Similar to a GSI, except that you cannot specify a different partition key; that will always be locked to the base table's partition key
+- You **must** specify the LSI's sort key
+- The attribute to use as the sort key cannot already be a key for the table
+	- **TODO** How does this restriction also apply to attributes that are keys for other GSIs or LSIs?
+- Supports _attribute projection_
+- Supports strong consistency
+- Any attribute that is a key for an LSI **must** be defined when inserting/updating a record
+- Any attribute that is a key for an LSI **will** be type checked.
+- Creation/Configuration
+	- Can only be created when the table is created. Otherwise you need to delete and re-create the table.
+	- Throughput is shared with main table
+	- Up to 5 LSIs per table
 
 # Throughput and Capacity Units (CU)
 
