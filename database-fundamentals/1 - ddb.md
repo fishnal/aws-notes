@@ -135,3 +135,42 @@ Scans **cannot** be ordered
 Scans are always **eventually consistent**
 
 Scans can run in parallel
+
+# Partitioning
+
+DynamoDB's performance can be attributed to the way it **partitions** the table. A table partition refers to a segment or portion of the table, which will contain some of the table's records. This is why a **partition key** is necessary, because DynamoDB maps partition keys to one of the physical partitions of your table.
+- You cannot see how many partitions your table has
+- You cannot directly interact with any of the physical partitions
+- You cannot determine which physical partition a record resides in
+- Your read and write capacity units are **split equally amongst each partition**
+	- If you have 200 RCUs, and 10 partitions, then each partition has 20 RCUs
+
+There is a formula for how many partitions your table _may_ have:
+![fe](./assets/ddb-partition-formula.png)
+
+Typically, the number of partitions is a power of 2.
+
+What happens when a partition (call it `A`) grows too large?
+- `A` will split into two partitions, `B` and `C`
+- Once the data has finished migrating to the new partitions, `A` will be removed
+- If `B` grows too large, then `B` will split into `D` and `E` (note that `C` is **not** split up)
+
+When does re-partitioning occur?
+- Usually when the partition grows past 10GB in size.
+
+What's wrong if we have too many partitions?
+- This can lead to your workload not being evenly distributed across the partitions. More on this below.
+- Keep in mind that RCUs and WCUs are split _equally_ amongst each partition
+
+## Balancing Partitions in Large Tables
+
+The best way to balance partitions is to use a good partition key (hmm..., the floor is made out floor...)
+
+If you have a partition that's significantly larger than the other partitions, then your RCUs and WCUs aren't evenly distributed across your partitions.
+- Say you have 4 partitions `A` thru `D`
+- Partitions `A` thru `C` have 5 records
+- Partition `D` has 100 records
+- Because `D` has more records than the other partitions, then a lot of requests will likely end up going to `D`.
+- This means that RCUs/WCUs for `D` are more likely to run out. When this happens, reads and writes **stop functioning in that partition**
+	- AWS does provide a free amount of **burst capacity**, which allows you to use more RCUs/WCUs than provisioned (and thus, read/writes to `D` can still continue)
+	- **However**, you cannot rely on this because AWS also uses burst capacity units for background maintenance tasks
