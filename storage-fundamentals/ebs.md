@@ -14,9 +14,11 @@
 
 SSDs are better suited for data stored in smaller blocks, whereas HDDs are better for larger blocks of data.
 
+![Comparison of volume types](./assets/ebs-volume-types.png)
+
 ## Security
 
-Data can be encrypted (via AES-256); all you have to do is enable the feature.
+Data can be encrypted (via AES-256); all you have to do is enable the feature. Internally, the keys are managed by KMS
 
 If a snapshot is created of an encrypted volume, then the snapshot will also be encrypted
 
