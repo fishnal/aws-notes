@@ -2,12 +2,14 @@
 
 * Stores files in an actual file system
 * Uses standard file system features, such as locking files, updating files, and a hierarchy structure
-* Optimized for low-latency access
 * Unlike an EBS volume, EFS can be accessed by multiple EC2 instances at once
+  * Useful for for parallel access of data
+* Optimized for low-latency access
 * Fully managed, highly available and durable
-* Very scalable
+* Very scalable (can scale to petabytes)
 * Designed to maintain a high-level of throughput
-* *Does not currently support Windows*
+* *Currently not supported on Windows*
+* *Currently not supported in all regions*
 
 ## Connectivity
 
