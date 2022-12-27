@@ -33,7 +33,7 @@ Uploading and downloading archives can only be using code
 
 You must submit a retrieval request in order to access your data in Glacier.
 * When ready, Glacier will store your data in a temporary object in an S3-RRS or S3-IA storage class bucket.
-* The original archive is left untouched.
+* The original archive is left untouched and remains in the Glacier storage class.
 
 **Standard** gives you any amount of data within 3-5 hours
 
