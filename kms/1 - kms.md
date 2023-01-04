@@ -9,4 +9,4 @@ KMS is only for encryption at rest.
 
 KMS works with AWS CloudTrail, so you can track how keys are being used and by whom.
 
-KMS is region specific, **however** multi-region keys are now supported for client-side encryption
+KMS is **region specific**, however multi-region keys are now supported for client-side encryption
