@@ -7,7 +7,9 @@ Topics
 
 ## Rotation of CMKs
 
-KMS rotates your keys every 365 days (1 year)
+### Automatic Key Rotation
+
+KMS automatically rotates your keys every 365 days (1 year) **if your key was not made from imported key material**
 * This cannot be changed
 * However, can still do manual key rotations (but this is a bit of a headache, see below...)
 * If a CMK is disabled or pending deletion, then KMS will not rotate it until it is re-enabled or deletion is cancelled.
