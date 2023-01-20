@@ -4,7 +4,7 @@ CloudFront (CF) is a Content Delivery Network (CDN) that speeds up distribution 
 
 ## Basic Flow
 
-1. When a user requests content from a CF distrobution, the request gets forwarded to the nearest edge location.
+1. When a user requests content from a CF distrobution, the request gets forwarded to the edge location with **least latency**.
 2. If the edge the content cached, it will deliver the cache instead. Otherwise, the edge will fetch the content from the origin servers.
 	- Cached objects will eventually expire (a value you can set)
 
