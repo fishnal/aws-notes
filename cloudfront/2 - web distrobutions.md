@@ -18,6 +18,7 @@ You can optionally specify an **origin path**, which is a directory in your orig
 
 If your origin is an S3 bucket, you can use an **origin access identity** to restrict access to the bucket.
 * These identities are CloudFront-specific
+* This will not remove any existing permissions
 
 ## Cache Behavior
 
@@ -32,3 +33,11 @@ If your origin is an S3 bucket, you can use an **origin access identity** to res
 * Can forward cookies to origin
 * Can forward query strings to origin
 * Can restrict viewers to use signed URLs or signed cookies
+
+## Distrobution Settings
+* Price Class
+* Alternate Domain Names (CNAMEs)
+* SSL Certificate (either one provided by cloudfront, or a custom one)
+* Default root object - by setting one, you avoid exposing the contents of your distro
+* Enable logging, and the bucket where logs are stored
+* Distrobution state - enabled/disabled (just a toggle for the distro, in case you don't want people interacting with it the moment the distro is created)
