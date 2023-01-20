@@ -44,14 +44,18 @@ Can optionally set an expiration of the imported key material. When it expires, 
 ## Things to Consider
 
 * Key material created by KMS has higher durability and availability
+* Can set an expiration time for your own material
 * In a region-wide failure, you will need to re-import the key material back into your CMK.
 
 ## Deleting a CMK
 
-KMS enforces a scheduled deletion process, ranging from 3-30 days.
+KMS enforces a scheduled deletion process, ranging from 7-30 days.
 
 When CMK is pending deletion, it cannot be used for encryption/decryption, nor can it be rotated.
 
 For CMKs with imported key material, you can delete just the key material and not the CMK.
 
 If you don't want to delete the CMK, you can instead disable it.
+
+**Recommended** Setup a Cloudwatch alarm when someone tries to use a CMK for encryption/decryption
+* Useful when your key is pending deletion, because these alarms can notify you that the key is still being used and that you should act accordingly.

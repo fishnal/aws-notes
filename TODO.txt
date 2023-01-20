@@ -1,1 +1,0 @@
-Notes on lessons including and before "Working with Amazon DynamoDB"

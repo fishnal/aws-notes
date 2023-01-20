@@ -39,3 +39,4 @@ In order to do this, the root user must have full access to the CMK:
 
 Grants allow a user to give a subset of their permissions to another AWS principal
 * Can only be created using the KMS API
+* Even though a Grant may be created, it may take some time to take effect (b/c of eventual consistency)
