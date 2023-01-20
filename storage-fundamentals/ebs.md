@@ -22,6 +22,20 @@ Data can be encrypted (via AES-256); all you have to do is enable the feature. I
 
 If a snapshot is created of an encrypted volume, then the snapshot will also be encrypted
 
+### How the encryption works
+
+EBS integrates with KMS to provide encyrption of your volumes.
+
+1. EBS requests a DEK (data encryption key) from KMS
+2. KMS generates DEK from the requested CMK
+3. CMK encrypts DEK and sends this back
+4. Encrypted DEK is stored on volumne as metadata
+5. Volume is attached to EC2 instance
+6. EC2 asks to decrypt the encrypted DEK from the volume
+7. KMS decrypted the encrypted DEK, and sends the plaintext DEK back to EC2 instance
+8. EC2 stores plaintext DEK in hypervisory memory _only as long as EBS volume is attached to the instance_
+9. EC2 uses plaintext DEK to perform I/O operaton on the volume, but stores data on the volume in encrypted form via AES-256
+
 ## Creating Volumes
 Can create the volume when you make a new EC2 instance (and thus it'll be attached when that EC2 instance launches) OR you can create it manually in the EC2 dashboard, and then attach it later
 

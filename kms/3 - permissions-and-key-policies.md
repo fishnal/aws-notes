@@ -11,11 +11,12 @@ Every CMK must have a key policy.
 * KMS creates a default key policy
 * Root user of AWS account has full access to the CMK
 * Root user can use IAM to manage access for other users and groups
+* If a user had full access to a CMK and the user was later deleted, then contact AWS support to regain control of the CMK
 
 ### When creating a CMK...
 
 Each CMK has a set of key administrators, who can only administer permissions for that CMK.
-* Key admins cannot encrypt using the CMK, however they can grant themselves permission to do so.
+* Key admins cannot use/encrypt with the CMK, however they can grant themselves permission to do so by updating the key policy
 * Optional checkbox for whether key admins can delete the CMK
 
 CMK has a set of users who can use the key for encryption.

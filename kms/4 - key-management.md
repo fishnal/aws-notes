@@ -7,7 +7,11 @@ Topics
 
 ## Rotation of CMKs
 
-KMS rotates your keys every 365 days (1 year)
+The longer a key is let in place, and the more data that is encrypted with that key, then if that key is breached then there's a much wider blast area
+
+### Automatic Key Rotation
+
+KMS automatically rotates your keys every 365 days (1 year) **if your key was not made from imported key material**
 * This cannot be changed
 * However, can still do manual key rotations (but this is a bit of a headache, see below...)
 * If a CMK is disabled or pending deletion, then KMS will not rotate it until it is re-enabled or deletion is cancelled.
@@ -33,8 +37,10 @@ KMS will also retain the previous/old underlying key in order to decrypt ciphert
 
 When creating CMKs, you can choose either to use (1) KMS key material or (2) external key material, which means importing your own key.
 * Your key must be in a binary format
+* Because you can import key material, you can technically create a CMK without any _initial_ key material
+* When using external key material, it becomes tied to the CMK and no other key material can be used for that CMK
 
-KMS will provide you a "wrapping key" or public key, and an import token. These provide you a secure way of uploading your own key.
+When importing material, KMS will provide you a "wrapping key" or public key, and an import token. These provide you a secure way of uploading your own key.
 * Use the wrapping/public key to encrypt your private key.
 * The import token ensures that the upload process was correct and complete.
 * The wrapping key and import token expire after 24 hours.
@@ -44,7 +50,7 @@ Can optionally set an expiration of the imported key material. When it expires, 
 ## Things to Consider
 
 * Key material created by KMS has higher durability and availability
-* Can set an expiration time for your own material
+* For key material provided by KMS, you cannot set an expiration time (but you can for imported keys)
 * In a region-wide failure, you will need to re-import the key material back into your CMK.
 
 ## Deleting a CMK
