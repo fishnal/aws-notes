@@ -1,1 +1,1 @@
-"What is serverless computing"
+"Knowledge Check: Understanding AWS Lambda"
