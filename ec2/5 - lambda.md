@@ -28,6 +28,7 @@ Function Policy - determines which AWS resources are allowed to invoke your func
 3. Trigger - an operation from an event source that causes the lambda to run
 4. Downstream resources - resources that are required during the execution of your lambda (i.e. your lambda queries a DDB table, so the DDB table is considered a downstream resource)
 5. Log streams
+6. Dead Letter Queue - failed lambda invocations can be sent to a DLQ, _but your lambda function must be asynchronous_
 
 ## Event Sources
 Event sources can either be poll or push based
@@ -38,10 +39,14 @@ Event sources can either be poll or push based
 - For push based services, the mapping is maintained in the event source
 - For poll based services, the mapping is held within your lambda
 
-## Sync/Async Invocations
+## Types of Invocations
 Poll-based events are ALWAYS synchronous invocations
 
 Push-based events, the invocation type (sync vs async) varies based on service
+
+When you invoke a lambda through the console or CLI, that is an **on-demand invocation**. You can also pick whether or not the invocation should be synchronous or asynchronous
+
+When a lambda is invoked by an event source, this is a **pre-determined invocation**. You do not get to pick whether it is a sync/async invocation.
 
 ## CloudWatch
 - Invocations - # of times lambda was invoked
