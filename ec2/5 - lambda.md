@@ -21,6 +21,7 @@ Function Policy - determines which AWS resources are allowed to invoke your func
 - IAM role
 - Handler name (name of the entry function in your code)
 - Max concurrency - how many invocations can occur at once
+- If configured without a VPC, then the security and networking for your function is handled by AWS Lambda.
 
 ## Components
 1. Lambda function - which is your compiled code
