@@ -58,3 +58,8 @@ When a lambda is invoked by an event source, this is a **pre-determined invocati
 - IteratorAge - (only for stream-based invocations) how long (in ms) it took to receive a batch of records to the time of the last record written to the stream
 - ConcurrentExecutions - combined metric for all lambdas plus custom concurrency limits; gives # of lambdas with a custom concurrency limit that were executed at a given time
 - UnreservedConcurrenctExecutions - similar to "ConcurrentExecutions" except that it's only in regard to functions _without a custom concurrency limit_
+
+## VPCs
+
+If you have a dedicated tenancy VPC, then your lambda _cannot_ access resources within the VPC
+* A "dedicated tenancy" VPC is a VPC that runs on its own dedicated hardware
