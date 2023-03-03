@@ -154,5 +154,3 @@ Servers
 
 Storage
 - In public cloud, often regarded as unlimited, durable, and scalable
-
-# Is Cloud For You?
