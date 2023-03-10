@@ -57,8 +57,8 @@ On-Demand Resourcing
 
 Scalability
 - Cloud makes it easier to scale resources "up and down" AND "in and out"
-	- UP/DOWN scaling: altering power or performance of an instance (i.e. better hardware)
-	- IN/OUT scaling: adding/removing more instances
+	- **UP/DOWN scaling**: increasing/decreasing power or performance of an instance (i.e. hardware)
+	- **IN/OUT scaling**: removing/adding more instances (removing is scaling in, adding is scaling out)
 
 Economy of Scale
 - Because public cloud computing needs a huge scale of resources, virtualization makes it easier and cheaper for both the vendor and customer
