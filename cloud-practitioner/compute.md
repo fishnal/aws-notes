@@ -180,6 +180,7 @@ ELBs can detect when an instance goes down, and re-route traffic to healthy inst
 
 - **Listeners** - defines how inbound connections are routed to your **target groups** based on ports and protocols set as **conditions**
 - **Target groups** - a group of resources that you want the ELB to route requests to based on **rules**
+- **Targets** - the resources in a target group
 - **Rules** - define how an incoming requests gets routed to which target group
 - **Health checks** - a health check is performed against all resources within a target group
 - **Internet-facing ELB**
@@ -197,6 +198,13 @@ ELBs can detect when an instance goes down, and re-route traffic to healthy inst
 	- With cross zone balancing, traffic is split equally **amongst the resources**:
 		- Since there are 14 total resources, each resource will end up handling ~7% of all requests.
 
+[**AWS Official Comparison of Elastic Load Balancing**](https://aws.amazon.com/elasticloadbalancing/features/#compare)
+- ALB has the most features
+- NLB is most performant
+- Classic balancer is more of a legacy option, and instead AWS recommends to use ALB or NLB over the classic balancer. _Note: There is an exception, see the Classic Load Balancer section_
+
+[**Differences between ALB and NLB**](https://blog.cloudcraft.co/alb-vs-nlb-which-aws-load-balancer-fits-your-needs/)
+
 ![ELB components](./assets/elb-components.png)
 
 ## Using HTTPS as an ALB Listener
@@ -206,3 +214,93 @@ ELBs can detect when an instance goes down, and re-route traffic to healthy inst
 - Selecting a certificate:
 	- Can select from/upload to ACM (recommended)
 	- Can select from/upload to IAM (only recommended when deploying ELBs in regions that are not supported by ACM)
+
+## Application Load Balancer (ALB)
+
+**Operates at Layer 7 of the OSI Model: "Application"**
+- Only handles HTTP or HTTPS traffic
+- Because it operates at Layer 7, an ALB can route traffic based on any detail in the HTTP request received (i.e. headers, payload, query parameters)
+- Provides advanced routing and visibility features
+- Example: your ALB may route HTTP traffic to Target Group 1, and HTTPS to Target Group 2
+
+## Network Load Balancer (NLB)
+
+**Operates at Layer 4 of the OSI Model: "Transport"**
+- Allows you to balancer requests purely based on the TCP, TLS, or UDP protocol
+- Because it operates at Layer 4, an NLB can only route traffic based on the connection
+	- Because NLBs do not inspect every aspect of a request, they need significantly less time to forward requests compared to ALBs
+- Able to process millions of requests per second while maintaining low latency
+- If your application's logic requires a static IP address, then an NLB is a good choice
+
+Supports cross-zone load balancing
+- NLB nodes use an algorithm to select a target in a zone
+	- Algorithm is based on the TCP sequence, protocol, source port, source IP, destination port, destionation IP
+- When a TCP connection is established with a target host, then the connections remains open with that target for the duration of the request
+
+## Classic Load Balancer
+
+- Supports HTTP, HTTPS, and TCP
+- **Best practice to use ALB over the classic load balancer**, unless you have an application already running in the EC2-classic network
+	- EC2-classic is no longer supported for newer AWS accounts
+	- EC2-classic allowed you to deploy instances in a single, flat network shared with other customers, instead of inside a VPC like it's done now
+
+Does not have provide as many features as ALB, HOWEVER has the following features that ALB does not have:
+- Support for EC2 classic
+- Support for TCP and SSL listeners
+- Support for sticky sessions using application-generated cookies
+- DOES NOT support target groups, can only route traffic to individual targets
+
+# EC2 Auto Scaling
+
+**EC2 Auto Scaling** will automatically increase/decrease your EC2 resources to meet demand based off of custom defined metrics and thresholds (i.e. CPU, RAM, response times)
+- AWS also has a more generalized version called **AWS Auto Scaling**
+- This approach of scaling is considered **scaling in/out or scaling horizontally**
+- Examples:
+	- When CPU usage is above 75%, add more instances
+	- When CPU usage is below 25%, terminate some instances
+
+Benefits
+- Cost Saving - auto scaling can scale back when metrics/thresholds drop below a certain value, helping you save money on resources used (because you didn't need those extra resources)
+- Customer Satisfaction - if you properly set auto scaling thresholds, then it's unlikely that customers will experience performance issues
+
+**Integrating auto scaling with ELBs** can significantly improve how scalable and flexible your architecture is (more on this later...)
+
+## Components of EC2 Auto Scaling
+
+Two main components
+1. Creating a **launch config** or **launch template** (_note:_ these are not the same)
+2. Creating an **auto scaling group**
+	- Without a launch config/template, your auto scaling group cannot know what instance it is launching, nor does it know how to configure the instance (i.e. security groups, IAM roles, storage volumes)
+
+**Launch configs/templates** answer the following questions:
+- What AMI to use
+- What instance type
+- Whether to use spot instances
+- Whether and when public IPs should be used
+- Whether user data is on first boot
+- How to configure storage volume
+- Security groups
+
+**Auto Scaling Group** defines:
+- Desired capacity, and other limitation of the group using scaling policies
+- Where the group should scale resources, such as which AZ
+
+### Launch Template vs Launch Configuration
+
+Launch templates are the newer and more advanced version of the launch configuration
+- Preferred over launch configuration
+- Templates allow you to simplify how you launch instances for your auto scaling groups
+- Can extend templates from existing ones
+
+Launch templates allow you to select an IAM instance profile to associate with your instances
+- Launch configurations, you select an IAM role instead
+
+## Integrating ELBs and EC2 Auto Scaling
+
+On their own, ELBs and auto scaling overcome really big hurdles. However, they also have their drawbacks
+- Suppose an ELB gets hit with a sudden increase in traffic. Although the ELB can evenly distribute traffic across the resources, all of the resources might be under heavy load, which can lead to slower response times.
+- Suppose an auto scaling group also gets hit with a burst of traffic. Here, more resources will be spun up in order to compensate for the increased demand. However, there is no guarantee that the traffic is distributed fairly across all of these new resources. As a result, you may have a 1 or 2 resources taking all of the burden.
+
+When attaching an ELB to an auto scaling group, the ELB automatically detects the instances in the group, and will distribute all traffic to those instances.
+- To associate an ELB, you must associate the auto scaling group with the ELB target group
+- For a classic load balancer, the EC2 fleet is registered directly with the load balancer
