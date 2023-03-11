@@ -3,10 +3,13 @@
 * Independent of the EC2 instance that it is associated with
 * Logically, not directly, attached to the instance
 * An EBS volume can be attached to only 1 EC2 instance. However, an EC2 instance can have multiple EBS volumes attached to it.
+* Primarily used for rapidly changing data that requires specific IOPS
 * Can create snapshots of an EBS volume either manually or via Amazon CloudWatch
 * Snapshots are **incremental** - that is it only copies new or changed data relative to the previous snapshot
 * Writes are **replicated multiple times** within the same availability zone
   * Because of this, EBS volumes are only available in a single availability zone. So if that zone fails, then you lose the EBS volume
+  * If you lose the volume, then you can recover from a snapshot
+* EBS volumes can only attach to instances that are in the same AZ as the volume
 
 ## Volume Types
 * SSD
@@ -37,9 +40,16 @@ EBS integrates with KMS to provide encyrption of your volumes.
 9. EC2 uses plaintext DEK to perform I/O operaton on the volume, but stores data on the volume in encrypted form via AES-256
 
 ## Creating Volumes
-Can create the volume when you make a new EC2 instance (and thus it'll be attached when that EC2 instance launches) OR you can create it manually in the EC2 dashboard, and then attach it later
+Can create the volume in 2 ways:
+1. When you make a new EC2 instance (and thus it'll be attached when that EC2 instance launches)
+2. Create it manually in the EC2 dashboard, and then attach it later
 
-Can configure size, volume type, what happens to the volume when it's attached instance terminates, and whether to use encryption.
+Can configure the following:
+- Size
+- Volume type
+- What happens to the volume when it's attached instance terminates
+- Whether to use encryption
+- Which AZ the volume will be in
 
 ## Flexible
 Ways to change EBS volume storage capacity
@@ -50,4 +60,8 @@ Ways to change EBS volume storage capacity
 ## Base Use Cases
 * Temporary storage
 * Multi-instance storage (this is bad because an EBS volume can only be attached to a single instance at a time, and thus can only be accessed by that instance)
-* Do NOT expect high durability or availability from an EBS volume
+
+Not recommended for
+* Temporary storage
+* Multi-instance storage access (remember, EBS volumes can only be accessed by a single instance at a time)
+* If you need very high durability and availability (use EFS or S3 instead)
