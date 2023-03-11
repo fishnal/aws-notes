@@ -36,13 +36,16 @@ You must submit a retrieval request in order to access your data in Glacier.
 * The original archive is left untouched and remains in the Glacier storage class.
 
 **Standard** gives you any amount of data within 3-5 hours
+- 2nd most expensive retrieval option
 
 **Expedited** gives you data within 1-5 minutes, but the data must be less than 250MB
+- Most expensive retrieval option
 
 **Bulk** gives you petabytes of data within 5-12 hours, but is the cheapest option.
+- Cheapest retrieval option
 
 ## Comparing Glacier Storage Classes
-![Comparing storage classes](./assets/s3-storage-classes.png)
+![Comparing storage classes](./assets/s3-overview-storage-classes.png)
 
 ## Security
 * Data is encrypted by default (via AES-256)
