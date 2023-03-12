@@ -132,3 +132,36 @@ Scaling a non-relational database is significantly easier than scaling a relatio
 ## Managed NoSQL services on AWS
 
 [See NoSQL Services in AWS](/cloud-practitioner/databases-nosql-services.md)
+
+# Relational Database Service (RDS)
+
+[See RDS](/database-fundamentals/0%20-%20rds.md)
+
+# DynamoDB (DDB)
+
+[See DDB](/database-fundamentals/ddb.md)
+
+Quick overview
+- Key-value store
+- Ultra-high performance
+- Single digit latency
+- Highly available, replicated across 3 different AZs in a region
+- Downsides
+	- Eventual consistency
+	- Less flexible queries (tradeoff for performance)
+	- Records can be max of 400kb
+	- Max of 20 global indexes
+	- Max of 5 secondary indexes per table
+- Very easy to setup and use
+	- Set tables up
+	- Configure provisioned throughput or on-demand throughput
+- Charged for throughput used and storage used
+- Every record needs a primary key
+	- Can be primitive type
+	- Can be composite primary key: partition and sort key
+- Secondary indexes
+	- Global vs Local secondary indexes
+- [Auto scaling for RCUs and WCUs](/database-fundamentals/ddb.md#auto-scaling-for-readwrite-capacity-units)
+- Server side encryption to protect data at rest
+
+# Redshift

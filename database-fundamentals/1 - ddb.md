@@ -7,7 +7,8 @@ Services for NoSQL databases/key-value stores
 - Look up data via primary key or through indexes
 - High performance, single-digit ms latency
 - Storage automatically grows, so you don't have to scale it
-- Reads/Writes slow down as table gets larger
+- Performance is consistent, no matter how large your table grows
+	- Contrasted with relational databases, these slow down as tables grow
 
 Pricing is based on
 - Amount of storage
@@ -98,6 +99,17 @@ If you use provisioned throughput and you use up all your read capacity units, y
 1 Write Capacity Unit allows you to store:
 - 1 record per second
 - Up to 1 KB in size (also rounded up, similar to RCUs)
+
+## Auto-Scaling for Read/Write Capacity Units
+
+RCUs and WCUs can be configured to auto scale with demand
+- Can configure to scale only RCUs, only WCUs, or both
+- Configure a target utilization
+	- When exceeded, more capacity units are increased
+	- When below this threshold, capacity units are decreased
+- Configure minimum and maximum provisioned capacity
+
+For each RCU and WCU, you can choose whether to apply these same auto-scaling settings to global secondary indexes
 
 # Queries
 

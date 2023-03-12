@@ -11,11 +11,11 @@ RDS uses failover mechanism on Orcale, MySQL, MariaDB, and PostgreSQL
 - Failover happens automatically and managed by AWS
 - Updates DNS record to point to secondary instance within 60-120s
 - Failover occurs if:
-	- Patching maintenance
-	- Host failure
-	- AZ failure
-	- Instance rebooted with failover option
-	- DB instance class is changed
+	- Primary instance is undergoing patching/maintenance
+	- Host failure on primary instance
+	- AZ failure of primary database
+	- Primary instance reboots with failover option
+	- DB instance class on primary database is changed (i.e. switching from general purpose to memory optimized)
 - When a failover occurs, an event is recorded as `RDS-EVENT-0025`.
 	- You can configure RDS to notify you via SMS or SNS
 
