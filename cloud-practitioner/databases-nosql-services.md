@@ -31,7 +31,7 @@ Use Cases
 - Gaming
 - Gathering data from IoT devices
 
-## Column Store
+## Column Store or Columnar Store
 **AWS service is Amazon Keyspaces**
 - Stores data using column-oriented model
 - Columns allow database to precisely access data needed for a query, without having to scan every row

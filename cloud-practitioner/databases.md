@@ -166,3 +166,33 @@ Quick overview
 - Server side encryption to protect data at rest
 
 # Redshift
+
+[See Redshift](/database-fundamentals/redshift.md)
+
+Quick Overview
+- Based on PostgreSQL, but is not the same
+- A **Redshift Cluster** contains
+	- A database
+	- 1 or more **compute nodes**
+	- **Leader node** (only present if there are multiple compute nodes)
+- Every **compute node** has its own CPU, storage, and memory
+	- Different node types (RA3 or Dense)
+- When queries are received from external apps, **leader node** coordinates communication between other nodes
+	- Think of the **leader node as a gateway**
+	- If query references tables associated with a compute node(s), then the query is distributed to those compute nodes
+	- If not, then the query runs on the leader node
+- Every compute node has a **node slice**, a partition of a compute node where memory and disk spaces split
+	- A node slice can process queries given by leader node
+	- Since compute node can have multiple slices, parallelism is leveraged
+- Applications connect to your Redshift DB via ODBC or JDBC
+- Highly performant
+	- Parallel operations because of compute nodes and slices
+	- Columnar data storage - precisely access data needed for a query, without having to scan every row
+	- Caching results
+- Can configure up to 10 IAM roles for a redshift cluster
+- Monitoring
+	- From CloudWatch
+		- CPU utilization
+		- Throughput
+	- **Exclusively from Redshift console**
+		- Query/Load performance
