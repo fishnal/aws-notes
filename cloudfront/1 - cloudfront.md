@@ -1,6 +1,7 @@
 # CloudFront
 
 CloudFront (CF) is a Content Delivery Network (CDN) that speeds up distribution of static and dynamic content via **edge locations.**
+- Edge locations are deployed in major cities and highly populated areas
 
 ## Basic Flow
 
