@@ -41,7 +41,7 @@ Data can be sourced from phones, cameras, drones, dash cams, etc.
 **A Kinesis Data Stream is a Stream Storage Layer**
 
 Highly customizable streaming solution
-	* Can programatically configure data ingestion, monitoring, scaling, elasticity, consumption
+- Can programatically configure data ingestion, monitoring, scaling, elasticity, consumption
 
 AWS provisions resources only when requested
 
@@ -49,11 +49,16 @@ AWS provisions resources only when requested
 
 Components of a data stream
 * A **data stream** is a set of **shards**
-* A **shard** is a sequence of **data records**
+* A **shard** is a sequence of **data records** of fixed capacity
 * A **data record** is immutable structure that contains
-	1. Sequence number
-	2. Partition key
-	3. Data blob
+	1. Partition key
+		- Groups data in a shard in a stream
+		- Defines the shard that this record belongs to
+	2. Sequence number
+		- Unique per partition-key within a shard
+		- Helps maintain order of arrival within a shard
+		- Increase over time for the same partition key (duh...)
+	3. Data blob (up to 1MB)
 
 For data older than 7 days, can get from the stream via `GetRecords`, but this incurs charges.
 * However when using an "Enhanced Fanout" Consumer (see more below), there is no charge for long-term data retrieval if you use `SubscribeToShard`
