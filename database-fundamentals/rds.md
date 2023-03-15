@@ -27,6 +27,11 @@ Primary instance can go down if:
 - If primary instance was rebooted with failover
 - If primary instance class is modified
 
+## RDS Proxy
+Allows applications to pool and share connections established with the database
+- Motivation: many applications have many open connections to the database server, and they may also open and close database connections very frequently; all of which can eat up database resources
+- RDS proxy solves this by reusing and sharing these connections when possible
+
 ## Scaling Storage
 Two types of storage: Elastic Block Storage (EBS) and Shared Cluster Storage
 

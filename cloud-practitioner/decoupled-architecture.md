@@ -54,3 +54,21 @@
 See the following
 - [Kinesis - Layers of Streaming](/kinesis.md#layers-of-streaming)
 - [Kinesis - Data Streams](/kinesis.md#kinesis-data-streams-very-customizable)
+
+## EventBridge
+
+**EventBridge** is a serverless **event bus**
+- An **event bus** is like an event-coordinator
+- Can take in information from external SaaS providers, other AWS services, or custom apps
+- EventBridge will filter and direct events to other systems and take action based on certain events
+
+## Step Functions
+[See Step Functions](/step-functions.md)
+
+## API Gateway
+[See API Gateway](/api-gateway.md)
+
+## AppSync
+
+AppSync allows you to manage and synchronize data across multiple devices and users
+- Uses GraphQL to allow clients to fetch, change, and subscribe to data all from a single endpoint

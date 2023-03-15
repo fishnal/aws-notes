@@ -136,6 +136,7 @@ Scaling a non-relational database is significantly easier than scaling a relatio
 # Relational Database Service (RDS)
 
 [See RDS](/database-fundamentals/rds.md)
+[See RDS Proxy](/database-fundamentals/rds.md#rds-proxy)
 [See RDS Multi-AZ](/database-fundamentals/rds-multi-az.md)
 
 # DynamoDB (DDB)
