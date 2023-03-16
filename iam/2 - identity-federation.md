@@ -15,9 +15,14 @@ AWS supports two types of IDPs
 - SAML providers
 
 ## Flow for Active Directory Authentication
-1. User authenticates against Active Directory Federated Service (ADFS)
+1. User authenticates against **Active Directory Federated Service (ADFS)**
 2. If successful, SAML issues authentication assertion back to user
-3. User sends this auth assertion to AWS STS (Security Token Service).
+3. User sends this auth assertion to **AWS STS (Security Token Service)**.
 	- This allows user to assume a role within IAM
 4. STS responds with temporary security credentials for an assumed role
 5. User now has access to AWS services
+
+## Security Token Service (STS)
+STS allows you to request temporary, limited-privilege credentials for both IAM users and federated users
+- By default, STS endpoints are activated in all regions. It is recommended to deactivate unused regions
+- There is a global endpoint for STS, but regional endpoints can reduce latency

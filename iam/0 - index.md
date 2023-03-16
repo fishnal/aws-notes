@@ -13,19 +13,27 @@ Access Management refers to authorization and access control
 ## Definitions
 - Authenticating is verifying who you are
 - **Authorizing** is verifying you are allowed/denied to do something
-- **Users** are _objects_ within IAM
+- **Users** are _objects_ that represent an identity
 	- Can be a real person
 	- Can be an account used only by an application (i.e. your REST server needs read access to your DynamoDB table)
+	- Can enforce password policies for users (highly recommended)
 - **Groups** are _objects_ that contain multiple users
 	- Cannot be used for authenticating (so you can't "login as a group")
 	- Used for authorizing access
 	- At most 100 groups can be made
 	- A single user can be in 10 groups at most
 - **Roles** allow identities and services to assume a set of permissions
-- **Policy Permissions** define _what_ resources can be accessed
+	- Similar to user objects in that a role is an identity with associated permissions
+	- However, roles do not define a single person; they are designed **to be assumed by another identity or service** that needs some set of permissions
+	- Roles do not have passwords or similar "login" protection
+	- Roles can be assumed as long as you have the correct permissions to assume that role
+- **Policies** define _what_ resources can and cannot be accessed
 	- By default, all actions are denied.
 	- Access is only granted from an explicit allow
 	- Access is denied if there are any statement that explicitly denies, and this will override any and all allows
+	- **Managed policies** are predefined and are stored in a library
+	- **In-line policies** are explicitly embedded within a user, group, or role; as a result it is not stored in a library and cannot easily be applied to another identity
+	- **Customer Managed policies** are written by you
 - **Access Control Mechanisms** define _how_ a resource can be accessed
 
 ## Groups
