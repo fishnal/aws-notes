@@ -33,7 +33,7 @@ A **hosted zone** is a container that holds information about how to route traff
 # Content Delivery Network (CDN)
 
 ## CloudFront
-[See CloudFront](/cloudfront/1%20-%20cloudfront.md)
+[See CloudFront](/cloudfront/cloudfront.md)
 
 ### Distributions
 CloudFront uses **distributions** to control which source data it needs to redistribute and to where

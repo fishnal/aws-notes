@@ -148,23 +148,23 @@ A secure location to store and manage your own docker images
 
 ## Elastic Container Service for Kubernetes (EKS)
 
-See [EKS](/ec2/3%20-%20eks.md)
+See [EKS](/ec2/eks.md)
 
 ## Elastic Beanstalk
 
-See [Elastic Beanstalk](/ec2/4%20-%20elastic-beanstalk.md)
+See [Elastic Beanstalk](/ec2/elastic-beanstalk.md)
 
 ## Lambda
 
-See [Lambda](/ec2/5%20-%20lambda.md)
+See [Lambda](/ec2/lambda.md)
 
 ## Batch
 
-See [Batch](/ec2/6%20-%20batch.md)
+See [Batch](/ec2/batch.md)
 
 ## Lightsail
 
-See [Lightsail](/ec2/7%20-%20lightsail.md)
+See [Lightsail](/ec2/lightsail.md)
 
 # Elastic Load Balancing
 
