@@ -168,3 +168,6 @@ IAM policies can specify either `Resource` or `NotResource`
 
 ### Trusted Advisor
 [See Trusted Advisor](/iam/trusted-advisor.md)
+
+## AWS Organizations
+[See AWS Organizations](/iam/aws-organizations.md)

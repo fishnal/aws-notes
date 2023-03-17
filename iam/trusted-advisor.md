@@ -8,7 +8,7 @@ Uses a **service-linked role called `AWSTrustedAdvisorServiceRolePolicy`** to ac
 - Cost optimization (i.e. prefer reserved capacity or remove unused capacity)
 - Performance (i.e. provisioned throughput)
 - Security
-- Faul Tolerance - increasing resiliency and avaialability
+- Fault Tolerance - increasing resiliency and avaialability
 - Service Limit - when resources reach 80% capacity of their service limit quota
 
 ## Different Support Plans
