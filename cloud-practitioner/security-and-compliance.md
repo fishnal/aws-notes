@@ -162,3 +162,9 @@ IAM policies can specify either `"Action"` or `"NotAction"`
 - `NotAction` means "any action but the ones specified"
 
 IAM policies can specify either `Resource` or `NotResource`
+
+### Policy Evaluation Logic
+[See Policy Evaluation Logic](/iam/1%20-%20iam-policy.md#policy-evaluation-logic)
+
+### Trusted Advisor
+[See Trusted Advisor](/iam/trusted-advisor.md)

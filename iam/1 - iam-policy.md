@@ -54,3 +54,15 @@ Permission Boundaries
 Organization Service Control Policies
 - Used by AWS organizations and attached to AWS accounts or organizational units
 - Acts similarly to **permission boundaries** except it operates the the account level and affects all members of that account
+
+## Policy Evaluation Logic
+1. Authentication - is user authenticated
+2. Context - what service or action is requested
+3. Policy Evaluation
+4. Result - whether access is allowed or denied
+
+Policies are evaluated in this order based on their type:
+1. Organizational Service Control Policies
+2. Resource-based Policies
+3. IAM Permission Boundaries
+4. Identity-based Policies
