@@ -41,7 +41,7 @@ Prefer assigning permissions to groups instead of to individual users
 - Easier to grant/deny permissions for multiple users
 
 ## Roles
-Using with services:
+**Using with services:**
 - Scenario: EC2 instance need to read from a DynamoDB table
 	- Bad: Could provide credentials of another user that has read access to the table
 	- Good: Make a role that has read access to the table, and assign it to the EC2.
@@ -50,12 +50,12 @@ Using with services:
 - Scenario: Multiple EC2 instances now need write access to the table
 	- Just modify the role to grant write access
 
-Using with IAM users:
+**Using with IAM users:**
 - Scenario: A user needs temporary access to some AWS resources
 	- Bad: Assign the user to a group that has the access and remove them later, OR give the user the access and remove it later.
 	- Good: Allow the user to temporarily assume a role with the access
 
-Types of Roles:
+### Types of Roles
 1. Service Role (EC2, Lambda, etc)
 2. Service-Linked Role: preset and immutable roles that perform a specific task
 3. Roles for Cross-Account Access
