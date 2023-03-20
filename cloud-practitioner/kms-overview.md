@@ -9,4 +9,4 @@ KMS is **region-specific; it is not multi-region**
 
 ## Key Components
 
-[See Components of KMS](/kms/2%20-%20components-of-kms.md)
+[See Components of KMS](/kms/components-of-kms.md)
