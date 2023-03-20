@@ -23,15 +23,15 @@ AWS Artifact is a dashboard that provides
 	- Username and password (authenticate and verify)
 	- Multi-Factor Authentication
 	- Federated Access - where users external to AWS can still acess resources without having to supply AWS user credentials. Instead, credentials are fetched from **identity providers**
-		- [More info on identity federation](/iam/2%20-%20identity-federation.md)
+		- [More info on identity federation](/iam/identity-federation.md)
 
-**Definitions** (see [IAM Definitions](/iam/0%20-%20index.md#definitions))
+**Definitions** (see [IAM Definitions](/iam/index.md#definitions))
 - Users
 - Groups
 - Roles
 - Policies
-- Identity Providers and [Identity Federation](/iam/2%20-%20identity-federation.md)
-- [Security Token Service](/iam/2%20-%20identity-federation.md#security-token-service-(sts))
+- Identity Providers and [Identity Federation](/iam/identity-federation.md)
+- [Security Token Service](/iam/identity-federation.md#security-token-service-(sts))
 
 ### IAM Users
 If creating a user through API or CLI, you can specify a **`Path`** for the user, which is used to help structure and organize your user identities
@@ -156,9 +156,18 @@ When creating a role for users federating via SAML, you can specify whether to p
 	- As a result, Alice only has access to RDS and EC2
 
 ### Types of Policies
-[See Types of Policies](/iam/1%20-%20iam-policy.md#types-of-policies)
+[See Types of Policies](/iam/iam-policy.md#types-of-policies)
 
 IAM policies can specify either `"Action"` or `"NotAction"`
 - `NotAction` means "any action but the ones specified"
 
 IAM policies can specify either `Resource` or `NotResource`
+
+### Policy Evaluation Logic
+[See Policy Evaluation Logic](/iam/iam-policy.md#policy-evaluation-logic)
+
+### Trusted Advisor
+[See Trusted Advisor](/iam/trusted-advisor.md)
+
+## AWS Organizations
+[See AWS Organizations](/iam/aws-organizations.md)
