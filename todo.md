@@ -1,6 +1,14 @@
-48 - using serverless functions
-
-To Learn/Review
-- Security Groups
-- Network ACLs (Access Control List)
-- VPCs and Subnets
+Fundamentals of Streaming with Kinesis
+- more of an overview for kinesis
+- explains benefits of streaming data in real-time or near real-time
+	- Streaming reduces need for large and expensive shared databases. This is because every stream consumer maintains its own data and state
+	- Stream processing fits naturally inside a decoupled microservices architecture
+	- Can provide actionable insights within _milliseconds_ of a recorded event
+- Questions to consider when deciding whether to use stream processing
+	- How important is it to have immediate insights?
+		- For example, a bug ticketing system probably does not need real-time streams
+		- However, banks, healthcare, and security services do require real-time or near real-time streaming data (i.e. fraudulent transactions, a hospital patient needs immediate assistance, there's a security breach or vulernability)
+- Challenges of Stream Processing
+	- Streaming applications are usually "high-touch" systems (lots of human interaction) which make the application inconsistent and difficult to automate
+	- Difficult to set up - streaming apps usually have lots of brittle components
+	- Expensive to create, maintain, and scale in on-premises datacenters
