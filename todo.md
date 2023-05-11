@@ -1,6 +1,5 @@
 Fundamentals of Streaming with Kinesis
-- more of an overview for kinesis
-- explains benefits of streaming data in real-time or near real-time
+- Benefits of streaming data in real-time or near real-time
 	- Streaming reduces need for large and expensive shared databases. This is because every stream consumer maintains its own data and state
 	- Stream processing fits naturally inside a decoupled microservices architecture
 	- Can provide actionable insights within _milliseconds_ of a recorded event

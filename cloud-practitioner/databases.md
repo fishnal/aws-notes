@@ -135,13 +135,13 @@ Scaling a non-relational database is significantly easier than scaling a relatio
 
 # Relational Database Service (RDS)
 
-[See RDS](/database-fundamentals/rds.md)
-[See RDS Proxy](/database-fundamentals/rds.md#rds-proxy)
-[See RDS Multi-AZ](/database-fundamentals/rds-multi-az.md)
+[See RDS](/databases/rds.md)
+[See RDS Proxy](/databases/rds.md#rds-proxy)
+[See RDS Multi-AZ](/databases/rds-multi-az.md)
 
 # DynamoDB (DDB)
 
-[See DDB](/database-fundamentals/ddb.md)
+[See DDB](/databases/ddb.md)
 
 Quick overview
 - Key-value store
@@ -163,12 +163,12 @@ Quick overview
 	- Can be composite primary key: partition and sort key
 - Secondary indexes
 	- Global vs Local secondary indexes
-- [Auto scaling for RCUs and WCUs](/database-fundamentals/ddb.md#auto-scaling-for-readwrite-capacity-units)
+- [Auto scaling for RCUs and WCUs](/databases/ddb.md#auto-scaling-for-readwrite-capacity-units)
 - Server side encryption to protect data at rest
 
 # Redshift
 
-[See Redshift](/database-fundamentals/redshift.md)
+[See Redshift](/databases/redshift.md)
 
 Quick Overview
 - Based on PostgreSQL, but is not the same

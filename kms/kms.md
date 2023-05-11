@@ -4,7 +4,7 @@ Service used to store and generate encryption keys
 
 KMS also contains keys used to decrypt your data
 
-KMS is used to protect **data encryption keys** (see this [diagram](../storage-fundamentals\assets\s3-encryption-infographic.png) for more info)
+KMS is used to protect **data encryption keys** (see this [diagram](/storage\assets\s3-encryption-infographic.png) for more info)
 
 KMS is only for encryption at rest.
 * KMS **will not** encrypt data in transit. If you want data to be encrypted in transit, consider using SSL.

@@ -52,8 +52,8 @@
 - On demand capacity vs Provisioned capacity
 
 See the following
-- [Kinesis - Layers of Streaming](/kinesis.md#layers-of-streaming)
-- [Kinesis - Data Streams](/kinesis.md#kinesis-data-streams-very-customizable)
+- [Kinesis - Layers of Streaming](/analytics/kinesis.md#layers-of-streaming)
+- [Kinesis - Data Streams](/analytics/kinesis.md#kinesis-data-streams-very-customizable)
 
 ## EventBridge
 

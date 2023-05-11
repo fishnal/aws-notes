@@ -1,25 +1,25 @@
 # S3
 
 ## S3 Overview
-[See S3](/storage-fundamentals/s3.md)
+[See S3](/storage/s3.md)
 
 ## S3 Storage Classes
 
 See the following:
-1. [Storage Classes](/storage-fundamentals/s3.md#storage-classes)
-2. [S3 Glacier](/storage-fundamentals/s3.md#amazon-s3-glacier)
+1. [Storage Classes](/storage/s3.md#storage-classes)
+2. [S3 Glacier](/storage/s3.md#amazon-s3-glacier)
 
 # EC2 Instance Storage
 
-[See EC2 Instance Storage](/storage-fundamentals/ec2-instance-storage.md)
+[See EC2 Instance Storage](/storage/ec2-instance-storage.md)
 
 # Elastic Block Store (EBS)
 
-[See EBS](/storage-fundamentals/ebs.md)
+[See EBS](/storage/ebs.md)
 
 # Elastic File System (EFS)
 
-[See EFS](/storage-fundamentals/efs.md)
+[See EFS](/storage/efs.md)
 
 # Snow Family
 
