@@ -7,7 +7,7 @@
 
 See the following:
 1. [Storage Classes](/storage/s3.md#storage-classes)
-2. [S3 Glacier](/storage/s3.md#amazon-s3-glacier)
+2. [S3 Glacier](/storage/s3-glacier.md)
 
 # EC2 Instance Storage
 
