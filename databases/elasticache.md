@@ -39,6 +39,8 @@ Memcached and Redis mainly differ in their feature sets
 **Redis Cluster** - a group of 1-90 shards
 **Memcached Cluster** - a group of 1+ nodes (note that memcached clusters do not have shards)
 
+ElastiCache will auto detect and replace failed nodes
+
 # Use cases
 - Gaming leaderboards that update quickly
 - Storing temporary session info (such as for websites)
