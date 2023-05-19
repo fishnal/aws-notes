@@ -1,5 +1,6 @@
 # Redshift
 
+- Relational database, so it's compatible with other RDBMS apps
 - Petabyte-scale data warehouse
 	- **Data warehouse** is where data is consolidated from multiple sources
 	- Usually stores large amounts of data
@@ -8,7 +9,6 @@
 		- **Extraction** - collecting the data from a source
 		- **Transform** - mapping the data to your needs
 		- **Load** - storing the data in your warehouse
-- Relational database, so it's compatible with other RDBMS apps
 
 ## Components
 
