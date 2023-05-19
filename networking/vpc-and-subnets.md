@@ -40,10 +40,18 @@ Subnets reside in a VPC, and allow you to segment your VPC into multiple network
 ![Diagram of a VPC with a public subnet and a private subnet](./assets/vpc-with-public-private-subnets.png)
 1. This is a **routing table**, which defines where requests are directed
 2. For the public subnet, the first row shows `10.0.0.0/16 | local`, which indicates that any requests in this IP range are to be directed within the VPC (aka the target)
+	- This means all subnets _within the same VPC_ can communicate with each other
+	- This route cannot be deleted or modified; it is there by default
 3. For the public subnet, the second row shows `0.0.0.0/0 | igw-someid`, which indicates that for all other IP addresses that don't match any other destination in the routing table, then forward the request to the  Internet Gateway (aka the target)
 	- **Note:** This is not done by default! You have to add this routing and the internet gateway in order for your subnet to talk to the public internet.
 4. The Internet Gateway is what allows a subnet to connect to the internet
 5. For the private subnet, the routing table only directs traffic within the VPC
+
+## Route Tables
+
+Route tables can be assigned to many subnets.
+
+However, a subnet can only have 1 route table.
 
 ## Building Resiliency with Subnets and AZs
 
