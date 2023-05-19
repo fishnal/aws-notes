@@ -2,6 +2,7 @@
 
 ## Network Access Control Lists (NACL)
 A **network access control list (NACL)** are virtual network-level firewalls that are associated to **every subnet**
+- NACL **operates at the subnet and network layers**
 - Help control traffic coming in and out of your VPC and between your subnets
 - By default, a NACL allows all traffic both inbound and outbound. _This is not very secure_
 - NACLs are **stateless**, which means that any response traffic generated from a request must be explicitly allowed in either the **inbound or outbound ruleset**
@@ -41,10 +42,13 @@ Unlike NACLs, security groups are **stateful**
 	- If we used this configuration with just a NACL and no security group, then ALL inbound TCP port 80 traffic will be denied, regardless of whether it is a request or response
 
 ## NAT Gateway
-- Allows private subnets to send requests to public internet, but also denies connections _initiated from the internet_
-	- So resources in the private subnet can send a request to public internet, and NAT gateway will allow responses from the public internet **only if** the
-- A NAT gateway is deployed inside a subnet
+- Deployed inside a public subnet
+- Allows private subnets to send requests to public internet, but denies connections _initiated from the internet_ (aka a request coming _into_ your private subnet)
+- Setup a route in your routing table such that if the IP destination is `0.0.0.0`, then the request is routed to the NAT gateway in your public subnet
+	- Using `0.0.0.0` as the destination filter indicates all other IPs
 - Under the hood, AWS will deploy multiple NAT gateway instances for resiliency, but you only see 1 gateway
+- NAT gateways are setup manually
+	- If you have multiple public subnets in different AZs, then you have to setup a NAT in each of those subnets
 
 ## Bastion Host
 Scenario: Suppose you have EC2 instances that sit in a private subnet, but you want to access them from your home office.
