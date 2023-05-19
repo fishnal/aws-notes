@@ -16,19 +16,22 @@ A **hosted zone** is a container that holds information about how to route traff
 - **Generic Top-Level Domains (TLDs)** such as `.watch` or `.clothing`
 - **Geographic Domains** such as `.au` or `.uk`
 
+### Routing Policies
+
 **Routing policies** - determines how Route 53 will response to these queries
 - **Simple Routing Policy** - default policy, for single resources that perform a given function
+- **Weighted Routing Policy** - suitable when you have multiple resource records that perform the same function
+	- Probability is calculated by weight of individual resource divided by sum of total value in resource record set
 - **Failover Routing Policy** - route traffic to different resources based on their health
 	- Considered as an **active-passive failover mechanism** because if primary instance is not healthy, then it will route to the secondary instance
 - **Geolocation Routing Policy** - based on geographic location
 	- If locations overlap (i.e. a country and a continent), then it chooses the smallest denominator (country in this case)
 	- Can also be used to restrict access
 - **Geoproximity Routing Policy** - based on location between users and the resources
+  - Only available when you use [Traffic Flow](./route-53.md#traffic-flow)
 - **Latency Routing Policy** - suitable when you have resources in multiple regions and want to lower latency
 - **Multivalue Answer Routing Policy** - allows you to get a response from a DNS request from up to 8 records at once that are picked at random (all will be healthy resources)
 	- Good for load balancing and high availaibility
-- **Weighted Routing Policy** - suitable when you have multiple resource records that perform the same function
-	- Probability is calculated by weight of individual resource divided by sum of total value in resource record set
 
 # Content Delivery Network (CDN)
 
