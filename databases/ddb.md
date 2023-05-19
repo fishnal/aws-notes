@@ -19,6 +19,12 @@ Can encrypt data at rest via
 - KMS - Customer managed CMK (a key stored in your account that you manage)
 - KMS - AWS managed CMK (a key stored in your account, but managed by AWS, charges apply)
 
+## DynamoDB Accelator (DAX)
+
+In-memory cache for DDB that delivers up to 10x performance improvement
+- _Microsecond_ latencies, even at 1M req/s
+- Not useful if requests require strong consistency or transactions
+
 ## Pros vs Cons
 Pros
 - Fully-managed

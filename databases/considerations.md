@@ -51,3 +51,41 @@ Great for relational, OLTP workloads that operate at a massive scale with consis
 Max storage limitation for MySQL and PostgreSQL for Aurora DB is 128TB. Other engines have up to 64TB.
 
 ## When to use Non-Relational databases
+
+General use cases
+- Need flexible data storage because your data structure changes over time
+- Need scaling beyond what a relational database can achieve with vertical scaling
+- Your data is better suited in a document, graph, or ledger database
+
+Support for Transactions
+- ACID compliance is most likely needed in this case
+- Use DocumentDB or DynamoDB
+    - DocumentDB
+        - Best for transactions and flexibility
+        - Lots of native data types and flexible data modeling
+        - Optimized for storing and querying data in JSON
+        - Designed for read-heavy workloads
+        - Supports timestamps and regex
+    - DocumentDB
+        - Single-digit ms low latency
+        - Infinitely scalable
+        - Most mature noSQL database service in AWS
+
+Need Cassandra compatibility
+- Use Keyspaces for Apache Cassandra
+- **This is not** ACID compliant
+
+Need high-performant cache
+- Use in-memory databases
+- **DAX** when DDB is your primary database
+- **Elasticache** otherwise
+    - Prefer **with Memcached** when caching simple key-values and you need less features (like persistence, advanced dat types like lists, pub/sub functionality, replication, or transactions)
+    - Prefer **with Redis** if you need more features
+        - Redis is notable for its persistence for replication and failovers
+        - Redis is the only caching option that supports transactions
+
+When data is highly connected, schema-free
+- Use graph databases (aka Neptune)
+
+Database needs to be optimized to track and measure data over time
+- Use TimeStream

@@ -102,6 +102,8 @@ Use Cases
 - Time is stored as key, data collected is stored as value
 - Computation is usually applied over a range of time data to return a single result
 - Primary purpose of a time-series database is to **provide answers**
+- The storage layer is made up of (1) an in-memory layer for recent data and (2) magnetic storage for data that gets older
+	- Can configure when data gets moved to magnetic storage
 
 Use Cases
 - Can determine MIN, MAX, and AVG utilization of CPU over a week
