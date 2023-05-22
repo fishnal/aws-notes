@@ -26,12 +26,12 @@ Challenges of Stream Processing
 Kinesis can stream one of two types of data:
 1. Binary encoded data (i.e. audio, video)
 2. Base64 text encoded data (i.e. logs, leaderboards, telemetry from devices)
-|Component|Stream Data Type|
-|---------|----------------|
-|Kinesis Video Streams|Binary|
-|Kinesis Data Streams|Text|
-|Kinesis Data Firehose|Text|
-|Kinesis Data Analytics|Text|
+	| Component              | Stream Data Type |
+	| ---------------------- | ---------------- |
+	| Kinesis Video Streams  | Binary           |
+	| Kinesis Data Streams   | Text             |
+	| Kinesis Data Firehose  | Text             |
+	| Kinesis Data Analytics | Text             |
 
 ## Layers of Streaming
 
@@ -47,27 +47,32 @@ Kinesis can stream one of two types of data:
 ## Services in Kinesis
 
 ### Kinesis Video Streams
+
 Designed to stream binary-encoded data from millions of sources
 
 Data should be "any type of binary-encoded time-series data"
 
 Data can be sourced from phones, cameras, drones, dash cams, etc.
 
+Supports **webRTC**, which allows for two-way, real-time media streaming between browsers, mobile apps, and connected devices
+
 ### Kinesis Data Streams (Very Customizable)
 
 **A Kinesis Data Stream is a Stream Storage Layer**
 
 Highly customizable streaming solution
-- Can programatically configure data ingestion, monitoring, scaling, elasticity, consumption
+- Programatically configure data ingestion, monitoring, scaling, elasticity, consumption
 
 AWS provisions resources only when requested
 
 **NOTE: Data Streams does not have the ability to do Auto Scaling. You need to implement this**
 
+AWS provides the **Kinesis Agent for Linux** and **Kinesis Agent for Windows** to help develop and manage Kinesis Data Streams
+
 Components of a data stream
-* A **data stream** is a set of **shards**
-* A **shard** is a sequence of **data records** of fixed capacity
-* A **data record** is immutable structure that contains
+* **Data stream** is a set of **shards**
+* **Shard** is a sequence of **data records** of fixed capacity
+* **Data record** is immutable structure that contains
 	1. Partition key
 		- Groups data in a shard in a stream
 		- Defines the shard that this record belongs to
@@ -77,11 +82,17 @@ Components of a data stream
 		- Increase over time for the same partition key (duh...)
 	3. Data blob (up to 1MB)
 
+Data records are available in stream for a finite amount of time
+- Ranges from 24 hours (default) to 8760 hours (365 days)
+- Records stored longer than 7 days incur an additional charge per gigabyte per month
+
 For data older than 7 days, can get from the stream via `GetRecords`, but this incurs charges.
 * However when using an "Enhanced Fanout" Consumer (see more below), there is no charge for long-term data retrieval if you use `SubscribeToShard`
 
 Types of consumers
 * Classic - pulls data from stream (aka polling mechanism)
+  * Limit to how many times and how much data consumers can pull per second
+  * Keep in mind that a shard's throughput is shared between all consumers
 * Enhanced Fan Out - consumer _subscribes_ to a shard instead of continuously polling
 	- Data is pushed automatically from shard to the enhanced consumer
 	- Shard limits are removed; every consumer gets 2mbps provisioned throughput per shard
@@ -93,12 +104,12 @@ Types of consumers
 Fully managed, **_near real-time_** streaming delivery service for data
 
 Ingested data can be dynamically transformed, scaled automatically, and automatically delivered to a data store
-
-Firehose does not need consumer applications
+- Since transformed data is sent to data store, Firehose does not need consumer applications
 
 Firehose will buffer incoming data before delivering it to its destination.
 * Can configure the buffer size (size of data) and interval (how long buffer should last before sending data to destination)
 * Buffer interval ranges from 60s to 900s
+  * This makes Firehose "near real-time"
 
 Firehose supports autoscaling
 
@@ -134,7 +145,7 @@ Video Stream
 
 Data Stream
 * Hourly cost based on # of shards in stream (regardless of whether data is actually in the stream)
-* Producerts putting data into stream storage
+* Producers putting data into stream storage
 * Optional: when extended data retention is enabled, extra hourly charge per shard
 * Only for Enhanced Fan Out consumers: based on amount of data and # of consumers
 
@@ -144,5 +155,5 @@ Firehose
 * If data is sent to a VPC, then incur additional charges for the amount of data and hourly charge per AZ
 
 Analytics
-* Hourly rate based on # of Amazon KPUs used
-* KPU - Kinesis Processing Unit, which is 1 virtual CPU and 4GB of memory
+* Hourly rate based on # of **Amazon KPUs** used
+* **KPU - Kinesis Processing Unit**, which is 1 virtual CPU and 4GB of memory
