@@ -8,6 +8,9 @@ To manage and control the flow of inbound requests destined to a group of target
 
 ELBs can detect when an instance goes down, and re-route traffic to healthy instances accordingly
 
+Integrates very well and easily with **EC2 Auto Scaling**
+- ELB solves the problem of
+
 ### Components of ELB
 
 - **Listeners** - defines how inbound connections are routed to your **target groups** based on ports and protocols set as **conditions**
@@ -42,7 +45,7 @@ ELBs can detect when an instance goes down, and re-route traffic to healthy inst
 ## Using HTTPS as an ALB Listener
 
 - You need an X509 server certificate and an associated security policy
-	- This is needed to allow the ALB to decrypt the HTTPS requests in order to figure out which target group to forward the request to
+	- The certificate is needed to allow the ALB to decrypt the HTTPS requests in order to figure out which target group to forward the request to
 - Selecting a certificate:
 	- Can select from/upload to ACM (recommended)
 	- Can select from/upload to IAM (only recommended when deploying ELBs in regions that are not supported by ACM)
@@ -54,6 +57,7 @@ ELBs can detect when an instance goes down, and re-route traffic to healthy inst
 - Because it operates at Layer 7, an ALB can route traffic based on any detail in the HTTP request received (i.e. headers, payload, query parameters)
 - Provides advanced routing and visibility features
 - Example: your ALB may route HTTP traffic to Target Group 1, and HTTPS to Target Group 2
+- Some services it offers are HTTP, FTP, SMTP, and NFS
 
 ## Network Load Balancer (NLB)
 
@@ -81,3 +85,9 @@ Does not have provide as many features as ALB, HOWEVER has the following feature
 - Support for TCP and SSL listeners
 - Support for sticky sessions using application-generated cookies
 - DOES NOT support target groups, can only route traffic to individual targets
+
+## Gateway Load Balancer (GWLB)
+
+A gateway service for distributing traffic across multiple virtual appliacnces, and also scales them up/down based on demand.
+
+When an instance is unhealthy, GWLB re-routes traffic away from the unhealthy instance in order to maximize app availability and minimize app downtime.
