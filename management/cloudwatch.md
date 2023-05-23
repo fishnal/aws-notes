@@ -15,7 +15,7 @@
 	- Can enable **detailed monitoring** for a metric, which will collect data every minute
 	- Can create **custom metrics** for your apps
 	- Custom metrics are regional
-	- **Anomaly detection** - employs machine learning against your metrics to detect activity that is unusual
+	- **Anomaly detection** - employs machine learning against your metrics to automatically create (and maintain) _CloudWatch Alarms_. This is best for metrics that are predictable.
 - CloudWatch Alarms
 	- Tightly integrates with metrics
 	- Can automatically take action when thresholds for a metric are exceeded
@@ -38,6 +38,9 @@
 		- Can be analyzed at the cluster, node, pod, and task levels
 	- **Lambda Insights** - aggregates system and diagnostic metrics related to Lambda
 		- This must be enabled on a **per-lambda basis**
+- CloudWatch Subscriptions
+	- Delivery logs in real-time to a subscriber, which can be an AWS service like Kinesis Streams or Lambdas
+	- Can specify filters for which logs are sent to the subscribers
 
 **Unified CloudWatch Agent** will collect logs and other metrics from EC2 instances and on-premise services running either Linux or Windows
 
@@ -102,3 +105,73 @@ Sharing options
 ### Pricing
 
 50 dashboards are free, after that each dashboard costs $3 per month
+
+## CloudWatch Anomaly Detection (AD)
+
+Recall that Anomaly Detection (AD) uses machine learning to automatically create alarms for certain metrics and maintain them
+- It does not necessarily find unusual patterns, see below
+
+AD defines a **"normal" behavior** for a metric, and when that metric goes outside of this "normal threshold", AD considers that to be an **"anomaly" or "unusual" behavior.**
+
+AD works best on metrics that will be predictable.
+- This does not mean certain metrics are better than others
+- Example: if your cpu usage fluctuates a lot, AD will not be able to properly guage "normal" behavior for the metric.
+
+Can use AD with a _standard or custom metric_, as long as the trend is discernable
+
+When using AD, you give an **anomaly detection threshold**, which is based on a desired standard deviation
+- Smaller values --> smaller threshold
+
+AWS has 12k+ built-in models for AD, so you very likely don't need to do manual configuration for standard metrics
+
+### Training Anomaly Detection
+
+When an AD model is being built, the alarm state is shown as `INSUFFICIENT_DATA`
+- Model is built from the metric's historical data
+- AWS recommends at least 3 days of data
+
+Before enabling AD, be wary of the metric's recent trend
+- If the recent trend is _not_ reflective of what the metric usually is, then when AD trains its model on this recent data, your alarms might be triggered more often than expected
+- Example:
+  - You have an EC2 instance that's typically at 50% cpu usage.
+  - However over the past week, the cpu usage was at 90% because of a stress test.
+  - If you enabled AD for this metric, then AD will think that being at 90% was the norm, and that 50% is considered an anomaly.
+- To avoid this, you **can exclude certain time periods that AD trains on**.
+
+## CloudWatch Subscriptions
+
+Delivery logs in real-time to a subscriber, which can be an AWS service like Kinesis Streams or Lambdas
+
+Can specify filters for which logs should be sent to the subscribers
+
+### Subscription Filters
+
+Contains the following
+- Log group name - the log group that the filter is associated with
+- Filter pattern - how to filter the logs
+- Destination ARN - where the logs are sent
+- Role ARN - role granted so that CloudWatch has permission to send logs to your subscribers/resources
+- Distribution method (only when destination is a Kinesis service) - how the logs are grouped (default is by log stream)
+
+### Cross Account Log Data Sharing
+
+This feature is **only available when destination is Kinesis Streams**
+
+To enable, must set a **log data sender** and **log data recipient**
+- Sender gets data from source, and lets CloudWatch Logs know when the data is ready to be sent to the **destination**
+- Recipient sets up a **destination** and lets CloudWatch Logs know when the recipient wants to receive data
+
+Setting up both the sender and recipient requires you to create a **Destination**, which contains
+- Destination name
+- Target ARN
+- Role ARN
+- Acces Policy
+
+**Note:** the log group and the Destination object must be in the same AWS region.
+- However, your kinesis stream (that the Destination object points to) can be in a different region
+
+### Visualizing and Analyzing
+
+CloudWatch Subscriptions does not natively support pushing to ElasticSearch. However, you can push them to Kinesis, and from there we can export the log data over to ElasticSearch using a **CloudWatch Logs Subscription Consumer**
+
+**CloudWatch Logs Subscription Consumer** is a specialized Kinesis stream reader (based on KCL) that helps deliver data from CloudWatch Logs to other services in near real-time.
