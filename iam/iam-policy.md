@@ -13,6 +13,9 @@ Inline Policies
 - If an identity has an inline policy, and that identity is deleted, then the inline policy is also deleted
 
 ## Example Policy
+
+Allows all S3 actions
+
 ```json
 {
 	"Version": "2012-10-17",
@@ -31,6 +34,8 @@ Inline Policies
 	]
 }
 ```
+
+If `Action` was set to `s3:Head*`, then the "asterisk" is a wildcard. So `HeadBucket` and `HeadObject` would be the matched actions
 
 ## Types of Policies
 
