@@ -42,12 +42,13 @@ Batch jobs usually wait until their workload reaches a certain size (i.e. 100 im
 Kinesis can stream one of two types of data:
 1. Binary encoded data (i.e. audio, video)
 2. Base64 text encoded data (i.e. logs, leaderboards, telemetry from devices)
- | Component              | Stream Data Type |
- | ---------------------- | ---------------- |
- | Kinesis Video Streams  | Binary           |
- | Kinesis Data Streams   | Text             |
- | Kinesis Data Firehose  | Text             |
- | Kinesis Data Analytics | Text             |
+
+| Component              | Stream Data Type |
+| ---------------------- | ---------------- |
+| Kinesis Video Streams  | Binary           |
+| Kinesis Data Streams   | Text             |
+| Kinesis Data Firehose  | Text             |
+| Kinesis Data Analytics | Text             |
 
 ## Layers of Streaming
 
@@ -122,6 +123,8 @@ Shard throughputs
 - Shards have a max throughput of 1000 records per second OR 1 MB
 - Partition key of a data record is counted as part of throughput limit
 
+Sharp capacities can be on-demand or provisioned
+
 ### Types of Consumers
 
 Consumer apps can only be subscribed to 1 stream
@@ -159,6 +162,11 @@ Fully managed, **_near real-time_** streaming delivery service for data
 
 Ingested data can be dynamically transformed, scaled automatically, and automatically delivered to a data store
 - Since transformed data is sent to data store, Firehose does not need consumer applications
+- Data store can be AWS services, like S3, DDB, or Redshift, or can be 3rd party like Datadog or Splunk
+  - For Redshift clusters as the final destination, Firehose will actually upload data to an S3 bucket first, then that is sent to your cluster.
+  - For S3 buckets, OpenSearch, and Splunk, you can optionally backup data in a different S3 bucket
+
+Firehose is the main service to Kinesis Data Stream records to an AWS Storage Service
 
 Firehose will buffer incoming data before delivering it to its destination.
 * Can configure the buffer size (size of data) and interval (how long buffer should last before sending data to destination)
@@ -189,14 +197,6 @@ Use cases
 	* Goal is to aggregate data in one format in a warehouse
 * Continuous Metrics
 * Responsive, real-time analytics (i.e. triggering alarms, sending notifications)
-
-## Fallbacks to Producers and Consumers
-
-Producers and exceeding write limits for a shard
-- Suppose you have 3 producers, so a total throughput of 3k writes/s or 3 MB/s
-- If exceed write limits for just 1 shard, then the _stream_ throws a `ProvisionedThroughputExceededException`
-
-
 
 ## Pricing Factors
 

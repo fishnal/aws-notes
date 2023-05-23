@@ -24,6 +24,11 @@ Can invoke `PutRecord` and `PutRecords`
   - Less HTTP overhead (i.e. initiating connection or TLS handshakes)
   - Better for app performance (making 3k small requests vs 30 batched requests)
 
+Exceeding write limits for a shard
+- Suppose you have 3 producers, so a total throughput of 3k writes/s or 3 MB/s
+- If exceed write limits for just 1 shard, then the _stream_ throws a `ProvisionedThroughputExceededException`
+- This can happen if your partition key logic is bad and thus your partitions are not distributed evenly (i.e. one partition gets 80% of source data, while the other two get 10% each).
+
 ## Consuming Data from the Stream
 
 Each thread gets data via `GetRecords` and `GetShardIterator`
@@ -103,5 +108,3 @@ There is 1 row for each shard in the stream
 Can encrypt data in transit via HTTPS and at rest via KMS
 
 FIPS endpoints are available if you require `FIPS 140-2` encryption
-
-## Data Streams and VPCs
