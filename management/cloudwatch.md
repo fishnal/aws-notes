@@ -42,7 +42,9 @@
 	- Delivery logs in real-time to a subscriber, which can be an AWS service like Kinesis Streams or Lambdas
 	- Can specify filters for which logs are sent to the subscribers
 
-**Unified CloudWatch Agent** will collect logs and other metrics from EC2 instances and on-premise services running either Linux or Windows
+## Unified CloudWatch Agent
+
+See [Unified CloudWatch Agent](/management/unified-cloudwatch-agent.md)
 
 ## CloudWatch EventBridge
 
