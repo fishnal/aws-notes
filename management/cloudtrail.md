@@ -23,6 +23,45 @@ Use Cases
 - Tracking changes to your AWS infrastructure
 - CloudTrail logs and be used as evidence for compliance and governance controls
 
+## Components
+
+Trails - main building block
+
+S3 - for storing CloudTrail logs, also needed for each trail created
+
+Logs - created by CloudTrail and records all events captured (see [above](#cloudtrail-logs))
+
+KMS (optional) - encrypting log files at rest
+
+SNS (optional) - notified when a new log is delivered to S3, or be used in conjunction with CloudWatch when thresholds have been violated
+
+CloudWatch Logs (optional) - allows you to deliver logs to CloudWatch Logs as well for more specific metric monitoring
+
+Event Selectors - adds a level of customization to the type of API requests you want a trail to capture
+
+Events - every API request captured as an "event" in a CloudTrail log file
+
+API Activity Filters - search filters that can be applied to your API activity history
+- These events are kept in the console for 7 days, even if the trail is stopped or deleted
+
+## CloudTrail Flow
+
+Creating a Trail
+1. Specify an S3 bucket for log storage
+2. Optional - Setup KMS encryption for log files
+3. Optional - Setup SNS notifications of new log files
+4. Optional - Enable log file validation
+
+After trail is created
+1. Optional - Deliver CloudTrail logs to CloudWatch for monitoring
+2. Optional - Configure event selectors
+3. Optional - Tagging
+
+Capturing an API Request
+1. CloudTrail checks if the API call matches any configured trails
+2. If matched, APO call is recorded into the current log file
+3. Log file is eventually sent to S3 (and optionally CloudWatch)
+
 ## CloudTrail Events
 
 - Every API request is recorded as an **"event"**
@@ -81,41 +120,16 @@ Verifying File Integrity
 - Can only be done programmatically or CLI
 - CANNOT do via console
 
-## Components
+### Monitoring CloudTrail Logs with CloudWatch Logs
 
-Trails - main building block
+Can configure a trail to integrate with CloudWatch Logs, which allows any API events captured by your tail to be delivered to CloudWatch for monitoring and alerting.
 
-S3 - for storing CloudTrail logs, also needed for each trail created
+Trail must have access to the following actions on your CloudWatch Log Group resource:
+- `CreateLogStream`
+- `PutLogEvents`
 
-Logs - created by CloudTrail and records all events captured (see [above](#cloudtrail-logs))
+**Note: CloudWatch Log Events have a max size of 256KB; so if a CloudTrail event is larger than this, then it won't be sent to your CW log group**
 
-KMS (optional) - encrypting log files at rest
-
-SNS (optional) - notified when a new log is delivered to S3, or be used in conjunction with CloudWatch when thresholds have been violated
-
-CloudWatch Logs (optional) - allows you to deliver logs to CloudWatch Logs as well for more specific metric monitoring
-
-Event Selectors - adds a level of customization to the type of API requests you want a trail to capture
-
-Events - every API request captured as an "event" in a CloudTrail log file
-
-API Activity Filters - search filters that can be applied to your API activity history
-- These events are kept in the console for 7 days, even if the trail is stopped or deleted
-
-## CloudTrail Flow
-
-Creating a Trail
-1. Specify an S3 bucket for log storage
-2. Optional - Setup KMS encryption for log files
-3. Optional - Setup SNS notifications of new log files
-4. Optional - Enable log file validation
-
-After trail is created
-1. Optional - Deliver CloudTrail logs to CloudWatch for monitoring
-2. Optional - Configure event selectors
-3. Optional - Tagging
-
-Capturing an API Request
-1. CloudTrail checks if the API call matches any configured trails
-2. If matched, APO call is recorded into the current log file
-3. Log file is eventually sent to S3 (and optionally CloudWatch)
+After trail is setup to send events to the log group, then configure CloudWatch to analyze your trail's events within the log files by adding **metric filters**
+- Allows you to search and count a specific value or term within events in a log file
+- Must create a **filter pattern** that you want CW to monitor and extract from your files
