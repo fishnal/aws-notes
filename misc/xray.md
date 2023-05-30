@@ -11,36 +11,39 @@
 ## Xray Data Flow
 1. Trace requests that come to your applcation/service (as well as data about the request and the service)
 2. Record the trace
-3. Look at X-Ray service map to analyze issues
+3. View service map to see trace data, such as latencies, HTTP statuses, and metadata for services
+4. Finally, analyze the issues (i.e. high latency, lots of 4xx HTTP responses)
 
 ## Components
 - Xray Daemon
-	- Listens for traffic on UDP port 2000 (port # can be configured)
+	- Listens for traffic on UDP port 2000 (port can be configured)
 	- Gathers segment data (more on this later) and relays to Xray API
 	- Needs to be authorized to publish trace data to Xray API
 		- Can be done via IAM role when daemon is deployed in EC2 environment
 		- Can supply environment variables when daemon is deployed in non-EC2 environment
+	- Available for Linux, Windows, and OSX
 - Xray SDK (code-based sdks like for Java, NodeJS, Python, etc)
 - Xray API
 - Xray console
 	- Visualizes the traces going through your services
 	- Can see avg latency and failure rates for each segment
 	- Segment will have the 4 colors
-		- Green i- successful
+		- Green - successful
 		- Orange/yellow - client error
 		- Red - server fault
 		- Purple - throttle errors
-- Other clients
+- Other clients - integrated via Xray SDK, API, or CLI
+	- Will have to define trace segments manually
 
 ## Concepts
-- Segments: portions of trace that correspond to a single service
-	- Data that is collected:
-		- Host and hostname, alias/IP address
-		- Request: HTTP method, path, client address, user agent
-		- Response: status and body
-		- Time elapsed (includes subsegments)
-- Subsegments: remote call or local compute sections within a service
-	- Records downstream services that your app interacts with (i.e. making a request to a 3rd party API like Spotify)
+- Segments: portions of trace that correspond to a single service, which collects the following data
+	- Host and hostname, alias/IP address
+	- Request: HTTP method, path, client address, user agent
+	- Response: status and body
+	- Time elapsed (includes subsegments)
+- Subsegments: records downstream calls from the point of view of the service that calls it
+	- Xray uses subsegments to identify downstream servies that _don't_ send segments, and then creates an interest for them on your service graph
+	- This is useful in case you need to analyze a downstream service call
 - Traces: end-end-path of a request through your app
 	- Multiple segments form a trace
 	- Each trace has a UNIQUE trace id
