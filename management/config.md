@@ -1,6 +1,13 @@
 # AWS Config
 
-See [Config](/management/config.md)
+- Control when and how to deploy feature flags and other updates to applications
+- Monitor an application's health and performance
+- Can create different app _configs_ to ensure your apps are always running in a desired state, and that controls are made in a controlled, predictable manner
+- Organizes configs that can be applied to specific environments (i.e. dev vs test)
+- Integrates with CloudWatch Alarms and can rollback config updates if an alarm is triggered during a deployment
+- Can roll out updates to a subset of your instances, before rolling them out to the entire fleet
+- Validates config format and values before deploying
+- Can track and roll-back config changes for recovery
 
 ## Things to Consider
 
