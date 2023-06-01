@@ -1,6 +1,6 @@
 # Elastic Container Service for Kubernetes (EKS)
 
-- Kubernetes is a container orchestration tool
+- Kubernetes is a container orchestration tool that is also **container-runtime agnostic**
 - EKS manages Kubernetes for you, and allows you to run Kubernetes across your AWS infra
 - Don't have to manage the **control plane**
 - You only need to manage worker nodes
@@ -23,6 +23,6 @@
 2. Create an EKS Cluster VPC
 3. Install `kubectl` and AWS-IAM Authenticator
 4. Create the EKS Cluster, using the VPC details from step 2
-5. Configure `kubectl` fore EKS
+5. Configure `kubectl` for EKS
 6. Provision and configure worker nodes
 7. Configure worker nodes to join your EKS cluster
