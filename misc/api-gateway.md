@@ -131,7 +131,7 @@ Requires a good connection
 #### Cognito Authorizer
 
 - Available only with REST API
-- Direct integration to cognito user pools, so you have complete user management
+- Direct integration to Amazon Cognito user pools, so you have complete user management
 - Access to long pages, MFA authorization, user info
 
 #### JWT Authorizer
