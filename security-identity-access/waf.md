@@ -25,13 +25,30 @@ Interacts with following services to filter out harmful inbound requests
 	- Blocked - request is dropped and bad response is sent back
 	- Counted - counts the number of matching requests
 
+Rule Types
+- IP set
+- Rule builder - create a custom rule
+- Rule group - use a rule group to act as a single rule
+
 ### Rule Groups
 - Collection of rules that you can apply to different Web ACLs
 - WAF has pre-configured groups for common web attacks
 - Can find rule groups on AWS marketplace
 
+## Web Capacity Units (WCUs)
+
+Each Web ACL has a limit of 1500 WCUs (web capacity units)
+- WCUs control the amount of resources needed by WAF to run your rules
+- WCUs are consumed by rules and rule groups
+- More intricate and complex rules consume more WCUs
+
+When creating a rule group, you must specify an _immutable capacity_. Rule groups cannot consume more capacity in a Web ACL than their _immutable capacity_
+- A rule group can belong to multiple Web ACLs.
+
 ## Flow of Requests with WAF
 **Note:** Although WAF sits in front of your resources, users do not make requests to the WAF itself. See below
+
+![WAF example](./assets/waf-example.png)
 
 Suppose we have a CloudFront distribution with an S3 bucket as its origin. Suppose we protect our CF distro with a WAF
 1. A user initiates a request

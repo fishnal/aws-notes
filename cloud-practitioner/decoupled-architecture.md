@@ -10,7 +10,7 @@
 - **Consumer** - consumes an event from event router
 
 ## SQS
-[See SQS](/sqs-sns-ses/sqs.md)
+[See SQS](/decoupled-architecture/sqs.md)
 - **Active delivery** via **polling**
 - Messages are persisted
 - **Visibility timeout** and how it relates to `DeleteMessage` action
@@ -19,7 +19,7 @@
 - Dead Letter Queues
 
 ## SNS
-[See SNS](/sqs-sns-ses/sns.md)
+[See SNS](/decoupled-architecture/sns.md)
 - **Passive delivery** via **pushes and subscriptions**
 - Messages are NOT persisted
 
@@ -57,18 +57,14 @@ See the following
 
 ## EventBridge
 
-**EventBridge** is a serverless **event bus**
-- An **event bus** is like an event-coordinator
-- Can take in information from external SaaS providers, other AWS services, or custom apps
-- EventBridge will filter and direct events to other systems and take action based on certain events
+[See EventBridge](/decoupled-architecture/event-bridge.md)
 
 ## Step Functions
-[See Step Functions](/step-functions.md)
+[See Step Functions](/compute/step-functions.md)
 
 ## API Gateway
-[See API Gateway](/api-gateway.md)
+[See API Gateway](/misc/api-gateway.md)
 
 ## AppSync
 
-AppSync allows you to manage and synchronize data across multiple devices and users
-- Uses GraphQL to allow clients to fetch, change, and subscribe to data all from a single endpoint
+[See AppSync](/security-identity-access/cognito.md#appsync)
