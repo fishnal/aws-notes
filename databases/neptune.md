@@ -17,7 +17,7 @@ Neptune DB Cluster
 - Contains a virtual DB cluster volume, which contains data across all of the instances
 	- The cluster uses multiple SSDs
 	- This shared volume will auto-scale up to a max of 64TB
-- Each cluster stores keeps it's own copy of the shared cluster data
+- Each cluster stores it's own copy of the shared cluster data
 	- Good for durability and maintainability
 	- **Neptune Storage Auto-Repair:** for a given cluster, will look at segment failures in an SSD and repair that segment based on data from other clusters
 - Support for read-replicas (max 15 replicas)
