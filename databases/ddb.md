@@ -75,6 +75,7 @@ Use case for Primary and Sort Keys
 	- Can be created at any time
 	- Each GSI has it's own throughput (separate from main table) and **must be configured**
 	- Up to 20 GSIs per table
+
 **Local Secondary Index (LSI)** - can only find data within a single partition key
 - Similar to a GSI, except that you cannot specify a different partition key; that will always be locked to the base table's partition key
 - You **must** specify the LSI's sort key
