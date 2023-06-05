@@ -35,8 +35,11 @@ Memcached and Redis mainly differ in their feature sets
 # Components
 
 **Node** - a fixed size of network attached RAM
+
 **Shard** - a group of 1-6 nodes
+
 **Redis Cluster** - a group of 1-90 shards
+
 **Memcached Cluster** - a group of 1+ nodes (note that memcached clusters do not have shards)
 
 ElastiCache will auto detect and replace failed nodes
