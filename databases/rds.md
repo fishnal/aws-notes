@@ -67,6 +67,7 @@ Two types of storage: Elastic Block Storage (EBS) and Shared Cluster Storage
 Vertical Scaling - improving the hardware
 - Can do this at any time for RDS
 - Can apply your new changes immediately or schedule them later
+
 Horizontal Scaling - adding more instances
 - Can create **read-only replicas** of the RDS instance
 - Read replicas help to offload traffic from main instance
