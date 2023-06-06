@@ -50,10 +50,10 @@ Organization Types
 
 ## SCP Inheritance
 Example 1
-![Example 1](./assets/scp-inheritance-ex1.png)
+![Example 1](./assets/scp-inheritance-ex1.PNG)
 
 Example 2
-![Example 2](./assets/scp-inheritance-ex2.png)
+![Example 2](./assets/scp-inheritance-ex2.PNG)
 
 ## Web Application Firewall (WAF)
 [See WAF](/security/waf.md)
