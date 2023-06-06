@@ -16,7 +16,7 @@ Benefits of streaming data
 How important is it to have immediate insights?
 - This deals with the **issue of latency and value of data over time**
 - For example, a bug ticketing system probably does not need real-time streams
-- However, banks, healthcare, and security services do require real-time or near real-time streaming data (i.e. fraudulent transactions, a hospital patient needs immediate assistance, there's a security breach or vulernability)
+- However, banks, healthcare, and security services do require real-time or near real-time streaming data (i.e. fraudulent transactions, a hospital patient needs immediate assistance, there's a security breach or vulnerability)
 
 ### Issues with Batch Processing
 
