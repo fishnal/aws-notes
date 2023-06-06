@@ -1,12 +1,12 @@
 # VPC Flow Logs
 
-captures traffic flowing within VPCs
+Captures traffic flowing within VPCs
 
-flow logs can be stored in S3 or sent directly to CloudWatch
+Flow logs can be stored in S3 or sent directly to CloudWatch
 
-limtations
-- for vpc peered connections, can only see flow logs of peered vpcs within same account
-- cannot retrieve info from resources within EC2-Classic environment
+Limtations
+- For vpc peered connections, can only see flow logs of peered vpcs within same account
+- Cannot retrieve info from resources within EC2-Classic environment
 - Once a Flow Log is created, it cannot be changed. You must delete and re-create one if you want to update it.
 - Traffic that is not captured
   - DHCP traffic within vpc
