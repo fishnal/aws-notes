@@ -56,13 +56,13 @@ Example 2
 ![Example 2](./assets/scp-inheritance-ex2.PNG)
 
 ## Web Application Firewall (WAF)
-[See WAF](/security/waf.md)
+[See WAF](/security-identity-access/waf.md)
 
 ## Firewall Manager
-[See Firewall Manager](/security/firewall-manager.md)
+[See Firewall Manager](/security-identity-access/firewall-manager.md)
 
 ## Shield
-[See Shield](/security/shield.md)
+[See Shield](/security-identity-access/shield.md)
 
 ## Amazon Inspector
 Lets you analyze deployed EC2 instances to identify potential security issues
