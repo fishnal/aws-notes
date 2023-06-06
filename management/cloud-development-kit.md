@@ -7,4 +7,3 @@
 - Provides libraries known as **constructs** to define AWS resources, such as S3 buckets, DDB tables, etc
 	- Comparable to a Terraform module
 - Developers can create and customize constructs
--
