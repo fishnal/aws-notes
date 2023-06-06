@@ -8,7 +8,7 @@ Flow
 - Follows a **send/receive** model
 - Producers push messages to queue
 - Queue is replicated across multiple servers for resiliency
-- When consumers are reaady, queue sends message to a consumer and starts a **visibility timeout**
+- When consumers are reaady, consumer polls for a message and the queue starts a **visibility timeout**
 
 ## Visibility Timeout
 - When a message is retrieved by a consumer, visibility timeout is started
