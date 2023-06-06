@@ -22,7 +22,7 @@ Can setup Flow Log against the following
 - A network interface on an EC2 instance
 - A subnet within a VPC
 - A VPC itself
-- For capturing traffic in VPCs and subnets, data is captured for *all* network interfaces
+- Note: For capturing traffic in VPCs and subnets, data is captured for *all* network interfaces
 
 Process of Flow Logs sending data to CloudWatch
 1. Each captured network interface will publish data to your log group using a different log stream
