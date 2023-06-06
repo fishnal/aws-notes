@@ -123,7 +123,7 @@ Shard throughputs
 - Shards have a max throughput of 1000 records per second OR 1 MB
 - Partition key of a data record is counted as part of throughput limit
 
-Sharp capacities can be on-demand or provisioned
+Shard capacities can be on-demand or provisioned
 
 ### Types of Consumers
 
