@@ -21,7 +21,7 @@ Can connect to a repo via HTTPS, SSH, or HTTPS GRC
 3. Connecting via HTTPS GRC (`git-remote-codecommit`)
 	1. When you're using temporary credentials, like federated credentials or ones from an Identity Provider
 	2. Must install Python and install python package `git-remote-codecommit`
-	3. Then clone repo with `git-remote-codecommit`
+	3. Then run same git commands with `git-remote-codecommit`
 
 ## Pricing
 
