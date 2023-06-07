@@ -40,6 +40,7 @@ Required fields
 - `version`: version of the buildspec
 - `phases`: commands to run for a given phase
 	- 4 main phases: `install`, `pre-build`, `build`, and `post-build`
+
 Optional fields
 - `run-as`: only for Linux users; which user to run commands as
 	- This field can also be specified _per phase_
