@@ -38,8 +38,8 @@ Rules contain the following fields
 - One or more actions
 	- `Transition` - move objects to another storage class
 	- `Expiration` - deleting objects
-	- `NoncurrentVersionTransition`
-	- `NoncurrentVersionExpiration`
+	- `NoncurrentVersionTransition` - same as `Transition` but refers to versioned objects
+	- `NoncurrentVersionExpiration` - same as `Expiration` but refers to versioned objects
 	- `ExpiredObjectDeleteMarker` - used for objects that have 0 versions but still have a delete marker left; this action will remove the object
 	- `AbortIncompleteMultipartUpload` - used when you need to clean up incomplete multipart uploads; can specify max number of days the multipart uploads remain "in progress"
 
