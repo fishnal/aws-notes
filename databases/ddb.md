@@ -75,6 +75,8 @@ Use case for Primary and Sort Keys
 	- The table's primary key is `foo`
 	- Without a GSI, `bar` can technically take on any type it wants (number, string, array, etc).
 	- However suppose there's a GSI whose primary key is a number called `bar`. Now, whenever you insert/update a record, the `bar` attribute must be present AND it must be a number.
+- The write capacity of a GSI should be greater than or equal to the main table's write capacity
+	- Since a GSI is it's own table, when a record is inserted, it is inserted into two tables. So you need to have the same (or greater) write capacities for both base and GSI tables.
 - Creation/Configuration
 	- Can be created at any time
 	- Each GSI has it's own throughput (separate from main table) and **must be configured**
