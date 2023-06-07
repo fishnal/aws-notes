@@ -19,6 +19,8 @@ Can encrypt data at rest via
 - KMS - Customer managed CMK (a key stored in your account that you manage)
 - KMS - AWS managed CMK (a key stored in your account, but managed by AWS, charges apply)
 
+Can expire records by specifying a TTL
+
 ## DynamoDB Accelator (DAX)
 
 In-memory cache for DDB that delivers up to 10x performance improvement
