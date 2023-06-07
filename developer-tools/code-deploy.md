@@ -4,7 +4,8 @@ Fully managed deployment service
 
 Uses an **agent-based method** for performing deployments on servers
 - Agent communicates with CodeDeploy using HTTPS protocol, polling for code deployment updates
-- Agent **is not** needed for serverless deployments
+- Agent is only needed for EC2/on-premise SERVERED deployments
+- Agent **is not** needed for SERVERLESS deployments
 
 Uses an `AppSpec` file where you define installation steps/commands to get your artifact up and running
 - Can be written in JSON or YAML, depending on the deployment endpoint.
@@ -19,7 +20,8 @@ Provisioning a new **deployment bridge**
 - Needs a revision/version of the software you want to deploy
 
 Can control the **speed of deployments** in terms of how many instances are updated at once
-- In the case of Lambdas, you can control **how traffic is rerouted** incrementally from the old Lambda to the new one
+- In the case of Lambdas, you can control **how traffic is rerouted** from the old Lambda to the new one
+	- Cannot use in-place deployment for serverless deployments
 
 Can create **deployment configurations**, or use an existing preset
 
