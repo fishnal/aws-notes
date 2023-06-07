@@ -20,6 +20,8 @@ Can encrypt data at rest via
 - KMS - AWS managed CMK (a key stored in your account, but managed by AWS, charges apply)
 
 Can expire records by specifying a TTL
+- Does not cost money, but _can_ consume throughput
+- Throughput is only consumed when you delete records that are replicated to other regions
 
 ## DynamoDB Accelator (DAX)
 
