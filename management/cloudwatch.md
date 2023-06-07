@@ -25,7 +25,7 @@
 		- `INSUFFICIENT_DATA` - alarm just started, metric is not available, or not enough data has been collected yet
 	- Example: an alarm when EC2 instances scale in/out (horizontal scaling)
 - CloudWatch EventBridge
-	- [See below](#cloudtrail-eventbridge)
+	- [See below](#cloudwatch-eventbridge)
 - CloudWatch Logs
 	- Gives you a _centralized location_ to house all of your logs from different AWS services (i.e. CloudTrail, EC2, Lambda logs) and your own applications
 	- Acts as a central repo for _real-time_ logs
