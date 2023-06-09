@@ -5,7 +5,7 @@ A **network access control list (NACL)** are virtual network-level firewalls tha
 - NACL **operates at the subnet and network layers**
 - Help control traffic coming in and out of your VPC and between your subnets
 - By default, a NACL allows all traffic both inbound and outbound. _This is not very secure_
-- NACLs are **stateless**, which means that any response traffic generated from a request must be explicitly allowed in either the **inbound or outbound ruleset**
+- NACLs are **stateless**, which means that any response traffic generated from a request must be explicitly allowed in either the **inbound AND outbound ruleset**
 - You can have the same NACL applied to multiple subnets, but only 1 NACL can be associated to 1 subnet
 
 ![Diagram of a NACL](./assets/nacl.png)
