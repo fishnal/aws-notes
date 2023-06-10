@@ -15,7 +15,7 @@ KMS automatically rotates your keys every 365 days (1 year) **if your key was no
 * This cannot be changed
 * However, can still do manual key rotations (but this is a bit of a headache, see below...)
 * If a CMK is disabled or pending deletion, then KMS will not rotate it until it is re-enabled or deletion is cancelled.
-* Cannot manage key rotation for any AWS managed CMKs; these rotate every 1095 days (3 years)
+* Cannot manage key rotation for any AWS managed CMKs; these rotate every year
 
 KMS does not delete the CMK, instead it will basically change/modify the existing CMK by rotating it's underlying key.
 
