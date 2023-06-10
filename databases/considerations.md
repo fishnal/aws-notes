@@ -66,7 +66,7 @@ Support for Transactions
         - Optimized for storing and querying data in JSON
         - Designed for read-heavy workloads
         - Supports timestamps and regex
-    - DocumentDB
+    - DynamoDB
         - Single-digit ms low latency
         - Infinitely scalable
         - Most mature noSQL database service in AWS
