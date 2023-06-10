@@ -6,12 +6,12 @@
 ## Components
 
 **Jobs** - a unit of work run by AWS Batch
-	- Can be an executable, an app within ECS, or a shell script
-	- Run on EC2 instances as containers
-	- Have various states (submitted, pending, running, failed)
+- Can be an executable, an app within ECS, or a shell script
+- Run on EC2 instances as containers
+- Have various states (submitted, pending, running, failed)
 
 **Job Definitions** - defines parameters for the jobs, how the job is run, and what configuration is used for the job
-	- Configuration can include # of vCPUs, data volumes, IAM roles, and mount points
+- Configuration can include # of vCPUs, data volumes, IAM roles, and mount points
 
 **Job Queues**
 - Jobs are placed into a queue until they run
